@@ -36,8 +36,8 @@ The write-up distinguishes automated evidence from hardware and operating-system
 - Chinese write-up: https://github.com/0use-TE/ReSerialSync/blob/main/docs/migration.zh-CN.md
 - Before/after: https://github.com/0use-TE/ReSerialSync/blob/main/docs/screenshots.md
 - Releases: https://github.com/0use-TE/ReSerialSync/releases
-- Windows archive: attach the published ReSerialSync-win-x64.zip download link
-- Linux archive: attach the published ReSerialSync-linux-x64.tar.gz download link
+- Windows archive: https://github.com/0use-TE/ReSerialSync/releases/download/v0.1.0-preview.1/ReSerialSync-win-x64.zip
+- Linux archive: https://github.com/0use-TE/ReSerialSync/releases/download/v0.1.0-preview.1/ReSerialSync-linux-x64.tar.gz
 - Video: optional; not yet produced
 
 ## Platform declaration
@@ -66,8 +66,8 @@ Preparing the entry does not constitute accepting these statements on behalf of 
 
 ## Final review before submission
 
-- [ ] Repository and licence publicly accessible.
-- [ ] Downloadable release archives uploaded and hashes match.
+- [x] Repository and licence publicly accessible.
+- [x] Downloadable release archives uploaded; local checksums provided.
 - [ ] Fresh-machine archive startup accepted on each claimed target.
 - [ ] Successful Linux device communication captured after permissions are configured.
 - [ ] Author approves personal-story wording and photo selection.
@@ -77,3 +77,7 @@ Preparing the entry does not constitute accepting these statements on behalf of 
 
 The public form HTML was inspected on October 8, 2026; the actual question titles are listed above.
 Closing time stated in the announcement: October 23, 2026, 23:59 UTC / October 24, 07:59 Asia/Shanghai.
+
+[Open the official form with project fields prefilled](https://docs.google.com/forms/d/e/1FAIpQLSfJsgz1HRHKsxH0yRnn2wcvbZ-tSkmnjDXxIhE5YjM1v3lVkg/viewform?usp=pp_url&entry.885900147=Ouse&entry.586421415=0use-TE&entry.289197765=https%3A%2F%2Fgithub.com%2F0use-TE%2FReSerialSync&entry.2064287351=https%3A%2F%2Fgithub.com%2F0use-TE%2FReSerialSync%2Fblob%2Fmain%2Fdocs%2Fmigration.en.md)
+
+This link fills only project/name fields; contact, residence, age and declarations remain for the author.

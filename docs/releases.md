@@ -1,6 +1,11 @@
 # 发布与运行 / Releases and runtime setup
 
-Download the Windows x64 ZIP or Linux x64 tar.gz from this repository's GitHub Releases page once a release is published.
+[Preview release v0.1.0-preview.1](https://github.com/0use-TE/ReSerialSync/releases/tag/v0.1.0-preview.1):
+
+- [Windows x64 ZIP](https://github.com/0use-TE/ReSerialSync/releases/download/v0.1.0-preview.1/ReSerialSync-win-x64.zip)
+- [Linux x64 tar.gz](https://github.com/0use-TE/ReSerialSync/releases/download/v0.1.0-preview.1/ReSerialSync-linux-x64.tar.gz)
+- [SHA256 checksums](https://github.com/0use-TE/ReSerialSync/releases/download/v0.1.0-preview.1/SHA256SUMS.txt)
+
 Native AOT packages do not require a separately installed .NET runtime. They still require operating-system libraries.
 Keep every file from the archive together, including the Linux native `.so` libraries.
 
@@ -84,7 +89,7 @@ bash scripts/publish-linux.sh
 | Target | Evidence | Still needed |
 | --- | --- | --- |
 | Windows x64 | AOT publishing; development screenshot with device ACK replies | Release archive fresh-machine acceptance |
-| Linux x64 | AOT publishing; WSLg startup and `/dev/ttyUSB0` discovery | Successful communication after permissions; native Linux acceptance |
+| Linux x64 | AOT publishing; WSLg startup and `/dev/ttyUSB0` discovery; extracted archive passed a 10-second startup smoke check with no stderr | Successful communication after permissions; native Linux acceptance |
 | macOS | Shared desktop code uses System.IO.Ports | Native build, startup and physical-device test; no macOS release claimed |
 | Browser / mobile | Project entry points | Platform serial implementations and device validation |
 
