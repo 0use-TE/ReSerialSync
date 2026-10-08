@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <data name="Ports" xml:space="preserve"><value>Ports</value></data>
+  <data name="Refresh" xml:space="preserve"><value>Refresh</value></data>
+  <data name="NoPorts" xml:space="preserve"><value>No ports found</value></data>
+  <data name="SelectPort" xml:space="preserve"><value>Select a port</value></data>
+  <data name="Unavailable" xml:space="preserve"><value>Unavailable</value></data>
+  <data name="Connected" xml:space="preserve"><value>Connected</value></data>
+  <data name="Disconnected" xml:space="preserve"><value>Disconnected</value></data>
+  <data name="Connecting" xml:space="preserve"><value>Working</value></data>
+  <data name="Configuration" xml:space="preserve"><value>Configuration</value></data>
+  <data name="Receive" xml:space="preserve"><value>Receive</value></data>
+  <data name="SendPanel" xml:space="preserve"><value>Send</value></data>
+  <data name="Logs" xml:space="preserve"><value>Logs</value></data>
+  <data name="BaudRate" xml:space="preserve"><value>Baud rate</value></data>
+  <data name="CustomBaudRate" xml:space="preserve"><value>Custom</value></data>
+  <data name="AiWelcomeTitle" xml:space="preserve"><value>How can I help you today?</value></data>
+  <data name="AiWelcomeHint" xml:space="preserve"><value>Connect ports, analyze data, or troubleshoot together.</value></data>
+  <data name="AiSuggestPorts" xml:space="preserve"><value>Show available ports</value></data>
+  <data name="AiSuggestAnalyze" xml:space="preserve"><value>Analyze current port data</value></data>
+  <data name="DataBits" xml:space="preserve"><value>Data bits</value></data>
+  <data name="Parity" xml:space="preserve"><value>Parity</value></data>
+  <data name="StopBits" xml:space="preserve"><value>Stop bits</value></data>
+  <data name="Handshake" xml:space="preserve"><value>Flow control</value></data>
+  <data name="Encoding" xml:space="preserve"><value>Encoding</value></data>
+  <data name="Connect" xml:space="preserve"><value>Connect</value></data>
+  <data name="Disconnect" xml:space="preserve"><value>Disconnect</value></data>
+  <data name="HexDisplay" xml:space="preserve"><value>HEX</value></data>
+  <data name="Timestamp" xml:space="preserve"><value>Timestamp</value></data>
+  <data name="AutoScroll" xml:space="preserve"><value>Auto scroll</value></data>
+  <data name="Pause" xml:space="preserve"><value>Pause</value></data>
+  <data name="Clear" xml:space="preserve"><value>Clear</value></data>
+  <data name="Export" xml:space="preserve"><value>Export</value></data>
+  <data name="LineEnding" xml:space="preserve"><value>Line ending</value></data>
+  <data name="Send" xml:space="preserve"><value>Send</value></data>
+  <data name="Interval" xml:space="preserve"><value>Interval (ms)</value></data>
+  <data name="StartTimer" xml:space="preserve"><value>Start timer</value></data>
+  <data name="StopTimer" xml:space="preserve"><value>Stop timer</value></data>
+  <data name="ResetCounters" xml:space="preserve"><value>Reset</value></data>
+  <data name="ResetLayout" xml:space="preserve"><value>Reset layout</value></data>
+  <data name="DarkTheme" xml:space="preserve"><value>Switch to dark</value></data>
+  <data name="LightTheme" xml:space="preserve"><value>Switch to light</value></data>
+  <data name="SwitchLanguage" xml:space="preserve"><value>切换中文</value></data>
+  <data name="Help" xml:space="preserve"><value>Guide &amp; About</value></data>
+  <data name="Close" xml:space="preserve"><value>Close</value></data>
+  <data name="WindowTitle" xml:space="preserve"><value>ReSerialSync · Serial debugger</value></data>
+  <data name="SendPlaceholder" xml:space="preserve"><value>Enter data to send</value></data>
+  <data name="HexPlaceholder" xml:space="preserve"><value>01 AF 0D 0A</value></data>
+  <data name="ExportTitle" xml:space="preserve"><value>Export debug data</value></data>
+  <data name="Exported" xml:space="preserve"><value>Export completed</value></data>
+  <data name="StorageUnsupported" xml:space="preserve"><value>Saving files is unavailable on this platform</value></data>
+  <data name="PortRequired" xml:space="preserve"><value>Select a port first</value></data>
+  <data name="InvalidBaud" xml:space="preserve"><value>Baud rate must be between 1 and 4,000,000</value></data>
+  <data name="EmptyPayload" xml:space="preserve"><value>The payload is empty</value></data>
+  <data name="HexLength" xml:space="preserve"><value>HEX requires complete two-digit bytes</value></data>
+  <data name="HexCharacters" xml:space="preserve"><value>HEX accepts only 0–9, A–F and whitespace</value></data>
+  <data name="InvalidPayload" xml:space="preserve"><value>Invalid payload</value></data>
+  <data name="ConnectionFailed" xml:space="preserve"><value>Connection failed</value></data>
+  <data name="SendFailed" xml:space="preserve"><value>Send failed</value></data>
+  <data name="PortFault" xml:space="preserve"><value>Serial port error</value></data>
+  <data name="RefreshFailed" xml:space="preserve"><value>Refresh failed</value></data>
+  <data name="ExportFailed" xml:space="preserve"><value>Export failed</value></data>
+  <data name="InvalidInterval" xml:space="preserve"><value>Interval must be between 20 and 3,600,000 ms</value></data>
+  <data name="DisplayOverflow" xml:space="preserve"><value>Some display data was skipped; full data is in the log</value></data>
+  <data name="LogTruncated" xml:space="preserve"><value>Full record in the log file</value></data>
+  <data name="SettingsFailed" xml:space="preserve"><value>Could not save settings</value></data>
+  <data name="SettingsRestoreFailed" xml:space="preserve"><value>Could not load settings; defaults are in use</value></data>
+  <data name="UnsupportedPlatform" xml:space="preserve"><value>Use the desktop app to access serial ports</value></data>
+  <data name="GuideHeading" xml:space="preserve"><value>User guide</value></data>
+  <data name="GuideConnect" xml:space="preserve"><value>Connecting multiple ports</value></data>
+  <data name="GuideConnectBody" xml:space="preserve"><value>Select a local port on the left, configure it, and connect. Multiple ports can stay connected; selecting another port does not interrupt them.</value></data>
+  <data name="GuideData" xml:space="preserve"><value>Sending and receiving</value></data>
+  <data name="GuideDataBody" xml:space="preserve"><value>Text uses the selected encoding. HEX accepts two-digit bytes with optional whitespace. Append CR, LF or CRLF with the line-ending option. Timed sending repeats at the chosen interval and stops on disconnect or error.</value></data>
+  <data name="GuideReceive" xml:space="preserve"><value>Receive monitor and logs</value></data>
+  <data name="GuideReceiveBody" xml:space="preserve"><value>Pause affects the display only. The receive monitor keeps the latest 256K characters and can be cleared or exported. Serilog records each port's traffic and errors, rolling daily or at 10 MB and retaining 30 files.</value></data>
+  <data name="GuideSave" xml:space="preserve"><value>Automatic saving</value></data>
+  <data name="GuideSaveBody" xml:space="preserve"><value>Each port remembers its own configuration and payload. Layout, theme, language and selected port are saved automatically. Connections and timers must be started manually after restart.</value></data>
+  <data name="AboutHeading" xml:space="preserve"><value>About the author</value></data>
+  <data name="AuthorName" xml:space="preserve"><value>Ouse · From 0 to use</value></data>
+  <data name="AuthorIntro" xml:space="preserve"><value>A .NET developer focused on C#, ASP.NET Core and Avalonia. Author of open-source projects including Crystal.Avalonia and GOZA.Dock.</value></data>
+  <data name="Website" xml:space="preserve"><value>Website</value></data>
+  <data name="GitHub" xml:space="preserve"><value>GitHub</value></data>
+  <data name="RepositoryPending" xml:space="preserve"><value>ReSerialSync will be open-sourced on GitHub. The repository link will be added after publication.</value></data>
+  <data name="None" xml:space="preserve"><value>None</value></data>
+  <data name="Odd" xml:space="preserve"><value>Odd</value></data>
+  <data name="Even" xml:space="preserve"><value>Even</value></data>
+  <data name="Mark" xml:space="preserve"><value>Mark</value></data>
+  <data name="Space" xml:space="preserve"><value>Space</value></data>
+  <data name="One" xml:space="preserve"><value>1</value></data>
+  <data name="OnePointFive" xml:space="preserve"><value>1.5</value></data>
+  <data name="Two" xml:space="preserve"><value>2</value></data>
+  <data name="SoftwareFlow" xml:space="preserve"><value>Software</value></data>
+  <data name="HardwareFlow" xml:space="preserve"><value>Hardware</value></data>
+  <data name="CombinedFlow" xml:space="preserve"><value>Software + hardware</value></data>
+  <data name="ConnectFirst" xml:space="preserve"><value>Connect the port first</value></data>
+  <data name="Settings" xml:space="preserve"><value>Settings</value></data>
+  <data name="Appearance" xml:space="preserve"><value>Appearance</value></data>
+  <data name="TabHeader" xml:space="preserve"><value>Tab headers</value></data>
+  <data name="ClassicHeader" xml:space="preserve"><value>Classic headers (square corners, no panel gaps)</value></data>
+  <data name="Classic" xml:space="preserve"><value>Classic</value></data>
+  <data name="Modern" xml:space="preserve"><value>Modern</value></data>
+  <data name="AllLevels" xml:space="preserve"><value>All levels</value></data>
+  <data name="NoLevels" xml:space="preserve"><value>No levels</value></data>
+  <data name="LogVerbose" xml:space="preserve"><value>Verbose</value></data>
+  <data name="LogDebug" xml:space="preserve"><value>Debug</value></data>
+  <data name="LogInformation" xml:space="preserve"><value>Information</value></data>
+  <data name="LogWarning" xml:space="preserve"><value>Warning</value></data>
+  <data name="LogError" xml:space="preserve"><value>Error</value></data>
+  <data name="LogFatal" xml:space="preserve"><value>Fatal</value></data>
+  <data name="AppStarted" xml:space="preserve"><value>Application started successfully</value></data>
+  <data name="LogSearch" xml:space="preserve"><value>Search logs</value></data>
+  <data name="LogTime" xml:space="preserve"><value>Time</value></data>
+  <data name="LogLevel" xml:space="preserve"><value>Level</value></data>
+  <data name="LogMessage" xml:space="preserve"><value>Message</value></data>
+  <data name="AI" xml:space="preserve"><value>AI assistant</value></data>
+  <data name="AiAddress" xml:space="preserve"><value>API address (OpenAI compatible)</value></data>
+  <data name="AiModel" xml:space="preserve"><value>Model</value></data>
+  <data name="AiConfigureFirst" xml:space="preserve"><value>Enter an API address and model in settings.</value></data>
+  <data name="AiYou" xml:space="preserve"><value>You</value></data>
+  <data name="AiTool" xml:space="preserve"><value>Serial operation</value></data>
+  <data name="AiPrompt" xml:space="preserve"><value>Describe a scenario or serial operation…</value></data>
+  <data name="AiSend" xml:space="preserve"><value>Send (Ctrl+Enter)</value></data>
+  <data name="AiStop" xml:space="preserve"><value>Stop</value></data>
+  <data name="AiStopped" xml:space="preserve"><value>Stopped</value></data>
+  <data name="AiNewChat" xml:space="preserve"><value>New chat</value></data>
+  <data name="AiSettings" xml:space="preserve"><value>AI settings</value></data>
+  <data name="AiRequestFailed" xml:space="preserve"><value>AI request failed. Check the address, model, key and connection, then retry.</value></data>
+  <data name="AiPromptTooLong" xml:space="preserve"><value>The message is too long. Shorten it and retry.</value></data>
+  <data name="CompactMode" xml:space="preserve"><value>Compact mode</value></data>
+  <data name="FullMode" xml:space="preserve"><value>Full mode</value></data>
+</root>

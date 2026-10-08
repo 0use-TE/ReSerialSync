@@ -1,0 +1,141 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:ReSerialSync.ViewModels" xmlns:icons="using:Material.Icons.Avalonia"
+             x:Class="ReSerialSync.Views.MainView" x:Name="MainRoot"
+             x:DataType="vm:MainViewModel" ViewModelLocator.AutoWireViewModel="True"
+             EventToCommand.EventName="Loaded" EventToCommand.Command="{Binding InitializeCommand}"
+             EventToCommand.CommandParameter="{Binding #MainRoot}">
+    <UserControl.KeyBindings>
+        <KeyBinding Gesture="Escape" Command="{Binding CloseHelpCommand}" />
+    </UserControl.KeyBindings>
+    <UserControl.Resources>
+        <DataTemplate x:Key="FullDockShell" x:DataType="vm:MainViewModel">
+            <DockShell Name="FullShell" TabStripSize="40" TabPresentation="{Binding SettingsPanel.Style.TabPresentation}" PanePresentation="{Binding SettingsPanel.Style.PanePresentation}" Background="{DynamicResource SemiColorBackground0}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="{Binding RightWidth, Mode=TwoWay}" MinWidth="240" />
+                    </Grid.ColumnDefinitions>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="{Binding LeftWidth, Mode=TwoWay}" MinWidth="240" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="{Binding ContentWidth, Mode=TwoWay}" MinWidth="320" />
+                        </Grid.ColumnDefinitions>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="{Binding PortsHeight, Mode=TwoWay}" MinHeight="140" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="{Binding ConfigurationHeight, Mode=TwoWay}" MinHeight="180" />
+                            </Grid.RowDefinitions>
+                            <DockRegion ItemsSource="{Binding LeftTabs}" SelectedItem="{Binding LeftSelected, Mode=TwoWay}" TabStripPlacement="{Binding LeftPlacement, Mode=TwoWay}" />
+                            <DockSplitter Grid.Row="1" />
+                            <DockRegion Grid.Row="2" ItemsSource="{Binding ConfigurationTabs}" SelectedItem="{Binding ConfigurationSelected, Mode=TwoWay}" TabStripPlacement="{Binding ConfigurationPlacement, Mode=TwoWay}" />
+                        </Grid>
+                        <DockSplitter Grid.Column="1" />
+                        <Grid Grid.Column="2">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="{Binding ReceiveHeight, Mode=TwoWay}" MinHeight="180" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="{Binding SendHeight, Mode=TwoWay}" MinHeight="180" />
+                            </Grid.RowDefinitions>
+                            <DockRegion ItemsSource="{Binding TopTabs}" SelectedItem="{Binding TopSelected, Mode=TwoWay}" TabStripPlacement="{Binding TopPlacement, Mode=TwoWay}" />
+                            <DockSplitter Grid.Row="1" />
+                            <DockRegion Grid.Row="2" ItemsSource="{Binding BottomTabs}" SelectedItem="{Binding BottomSelected, Mode=TwoWay}" TabStripPlacement="{Binding BottomPlacement, Mode=TwoWay}" />
+                        </Grid>
+                    </Grid>
+                    <DockSplitter Grid.Column="1" />
+                    <DockRegion Grid.Column="2" Name="RightDock" ItemsSource="{Binding RightTabs}" SelectedItem="{Binding RightSelected, Mode=TwoWay}" TabStripPlacement="{Binding RightPlacement, Mode=TwoWay}" />
+                </Grid>
+            </DockShell>
+        </DataTemplate>
+        <DataTemplate x:Key="CompactDockShell" x:DataType="vm:MainViewModel">
+            <DockShell Name="CompactShell" TabStripSize="40" TabPresentation="{Binding SettingsPanel.Style.TabPresentation}" PanePresentation="{Binding SettingsPanel.Style.PanePresentation}" Background="{DynamicResource SemiColorBackground0}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="{Binding LeftWidth, Mode=TwoWay}" MinWidth="240" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="{Binding ContentWidth, Mode=TwoWay}" MinWidth="320" />
+                    </Grid.ColumnDefinitions>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="{Binding PortsHeight, Mode=TwoWay}" MinHeight="140" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="{Binding ConfigurationHeight, Mode=TwoWay}" MinHeight="180" />
+                        </Grid.RowDefinitions>
+                        <DockRegion ItemsSource="{Binding LeftTabs}" SelectedItem="{Binding LeftSelected, Mode=TwoWay}" TabStripPlacement="{Binding LeftPlacement, Mode=TwoWay}" />
+                        <DockSplitter Grid.Row="1" />
+                        <DockRegion Grid.Row="2" ItemsSource="{Binding ConfigurationTabs}" SelectedItem="{Binding ConfigurationSelected, Mode=TwoWay}" TabStripPlacement="{Binding ConfigurationPlacement, Mode=TwoWay}" />
+                    </Grid>
+                    <DockSplitter Grid.Column="1" />
+                    <Grid Grid.Column="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="{Binding ReceiveHeight, Mode=TwoWay}" MinHeight="180" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="{Binding SendHeight, Mode=TwoWay}" MinHeight="180" />
+                        </Grid.RowDefinitions>
+                        <DockRegion ItemsSource="{Binding TopTabs}" SelectedItem="{Binding TopSelected, Mode=TwoWay}" TabStripPlacement="{Binding TopPlacement, Mode=TwoWay}" />
+                        <DockSplitter Grid.Row="1" />
+                        <DockRegion Grid.Row="2" ItemsSource="{Binding BottomTabs}" SelectedItem="{Binding BottomSelected, Mode=TwoWay}" TabStripPlacement="{Binding BottomPlacement, Mode=TwoWay}" />
+                    </Grid>
+                </Grid>
+            </DockShell>
+        </DataTemplate>
+    </UserControl.Resources>
+    <Panel>
+        <Grid RowDefinitions="Auto,*,Auto" Margin="12,6">
+            <Grid ColumnDefinitions="*,Auto" Margin="0,0,0,6">
+                <StackPanel Orientation="Horizontal" Spacing="10" VerticalAlignment="Center">
+                    <Image x:Name="AppLogo" Source="/Assets/reserialsync-icon.png" Width="28" Height="28" />
+                    <TextBlock Text="ReSerialSync" FontSize="17" FontWeight="Medium" VerticalAlignment="Center" />
+                </StackPanel>
+                <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="8">
+                    <Button Classes="icon" ToolTip.Tip="{Binding CompactTooltip}" Command="{Binding ToggleCompactCommand}"><icons:MaterialIcon Kind="{Binding CompactIcon}" Width="20" Height="20" /></Button>
+                    <Button Classes="icon" ToolTip.Tip="{Binding Text[ResetLayout]}" Command="{Binding ResetLayoutCommand}">
+                        <icons:MaterialIcon Kind="ViewDashboardOutline" Width="20" Height="20" />
+                    </Button>
+                    <Button Classes="icon" ToolTip.Tip="{Binding ThemeTooltip}" Command="{Binding ToggleThemeCommand}" CommandParameter="{Binding #MainRoot}">
+                        <icons:MaterialIcon Kind="{Binding ThemeIcon}" Width="20" Height="20" />
+                    </Button>
+                    <Button Classes="icon" ToolTip.Tip="{Binding Text[SwitchLanguage]}" Command="{Binding ToggleLanguageCommand}">
+                        <icons:MaterialIcon Kind="Translate" Width="20" Height="20" />
+                    </Button>
+                    <Button Classes="icon" ToolTip.Tip="{Binding Text[Settings]}" Command="{Binding ShowSettingsCommand}">
+                        <icons:MaterialIcon Kind="CogOutline" Width="20" Height="20" />
+                    </Button>
+                </StackPanel>
+            </Grid>
+            <Panel Grid.Row="1">
+                <ContentControl Content="{Binding FullLayoutHost}" ContentTemplate="{StaticResource FullDockShell}"
+                                HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" />
+                <ContentControl Content="{Binding CompactLayoutHost}" ContentTemplate="{StaticResource CompactDockShell}"
+                                HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" />
+            </Panel>
+            <Grid Grid.Row="2" ColumnDefinitions="*,Auto" Margin="0,4,0,0">
+                <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+                    <TextBlock Text="{Binding Workspace.SelectedPort.PortName}" FontWeight="SemiBold" />
+                    <TextBlock Text="{Binding Workspace.SelectedPort.StateLabel}" Opacity="0.65" />
+                </StackPanel>
+                <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="12" IsVisible="{Binding Workspace.HasSelection}">
+                    <TextBlock Text="{Binding Workspace.SelectedPort.ReceivedBytes, StringFormat='RX {0:N0} B'}" VerticalAlignment="Center" />
+                    <TextBlock Text="{Binding Workspace.SelectedPort.SentBytes, StringFormat='TX {0:N0} B'}" VerticalAlignment="Center" />
+                    <Button Classes="icon" Width="28" Height="28" Padding="4" ToolTip.Tip="{Binding Text[ResetCounters]}" Command="{Binding Workspace.SelectedPort.ResetCountersCommand}"><icons:MaterialIcon Kind="Restore" Width="20" Height="20" /></Button>
+                </StackPanel>
+            </Grid>
+        </Grid>
+        <Panel IsVisible="{Binding IsHelpOpen}">
+            <Border Background="{DynamicResource SemiColorBackground0}" Opacity="0.85" />
+            <Border x:Name="HelpPanel" Background="{DynamicResource SemiColorBackground0}" CornerRadius="10" Padding="24" BorderThickness="1" BorderBrush="{DynamicResource SemiColorBorder}" BoxShadow="0 8 32 0 #20000000"
+                    MaxWidth="940" MaxHeight="720" Margin="32" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <Grid RowDefinitions="Auto,*">
+                    <Grid ColumnDefinitions="*,Auto" Margin="0,0,0,16">
+                        <TextBlock Text="{Binding Text[Settings]}" FontSize="22" FontWeight="SemiBold" />
+                        <Button Grid.Column="1" Classes="icon" ToolTip.Tip="{Binding Text[Close]}" Command="{Binding CloseHelpCommand}"><icons:MaterialIcon Kind="Close" Width="20" Height="20" /></Button>
+                    </Grid>
+                    <ContentControl Grid.Row="1" Content="{Binding SettingsPanel}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" />
+                </Grid>
+            </Border>
+        </Panel>
+    </Panel>
+</UserControl>

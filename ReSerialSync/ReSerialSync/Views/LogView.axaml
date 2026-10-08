@@ -1,0 +1,57 @@
+<UserControl xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:ReSerialSync.ViewModels" xmlns:models="using:ReSerialSync.Models" xmlns:icons="using:Material.Icons.Avalonia"
+             x:Class="ReSerialSync.Views.LogView" x:Name="LogRoot" x:DataType="vm:LogViewModel">
+    <UserControl.Styles>
+        <Style Selector="TextBlock.level.info"><Setter Property="Foreground" Value="{DynamicResource SemiColorInformation}" /></Style>
+        <Style Selector="TextBlock.level.warning"><Setter Property="Foreground" Value="{DynamicResource SemiColorWarning}" /></Style>
+        <Style Selector="TextBlock.level.error"><Setter Property="Foreground" Value="{DynamicResource SemiColorDanger}" /></Style>
+        <Style Selector="TextBlock.level.debug"><Setter Property="Foreground" Value="{DynamicResource SemiColorText2}" /></Style>
+        <Style Selector="ListBoxItem">
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            <Setter Property="Padding" Value="4,1" />
+            <Setter Property="MinHeight" Value="0" />
+        </Style>
+    </UserControl.Styles>
+    <Grid RowDefinitions="Auto,Auto,*,Auto" Margin="12,4,12,6" IsEnabled="{Binding Workspace.HasSelection}">
+        <Grid ColumnDefinitions="*,Auto,Auto,Auto" ColumnSpacing="8" Margin="0,0,0,4">
+            <TextBox Classes="Bordered" Text="{Binding SearchText, Mode=TwoWay}" PlaceholderText="{Binding Text[LogSearch]}" Height="36" VerticalContentAlignment="Center" />
+            <Button Grid.Column="1" Content="{Binding LevelFilterLabel}" Height="36" MinWidth="120" Padding="12,0" HorizontalContentAlignment="Left">
+                <Button.Flyout>
+                    <Flyout Placement="BottomEdgeAlignedLeft">
+                        <StackPanel MinWidth="160" Margin="8" Spacing="4">
+                            <ItemsControl ItemsSource="{Binding LevelOptions}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate x:DataType="models:LogLevelOption">
+                                        <CheckBox Content="{Binding Label}" IsChecked="{Binding IsEnabled, Mode=TwoWay}" />
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </StackPanel>
+                    </Flyout>
+                </Button.Flyout>
+            </Button>
+            <Button Grid.Column="2" Classes="icon" ToolTip.Tip="{Binding Text[Clear]}" Command="{Binding Session.ClearLogsCommand}"><icons:MaterialIcon Kind="DeleteOutline" Width="20" Height="20" /></Button>
+            <Button Grid.Column="3" Classes="icon" ToolTip.Tip="{Binding Text[Export]}" Command="{Binding ExportFilteredLogsCommand}" CommandParameter="{Binding #LogRoot}"><icons:MaterialIcon Kind="Export" Width="20" Height="20" /></Button>
+        </Grid>
+        <Grid Grid.Row="1" ColumnDefinitions="92,84,*" Margin="12,0,12,4" ColumnSpacing="12" Opacity="0.65">
+            <TextBlock Text="{Binding Text[LogTime]}" /><TextBlock Grid.Column="1" Text="{Binding Text[LogLevel]}" /><TextBlock Grid.Column="2" Text="{Binding Text[LogMessage]}" />
+        </Grid>
+        <ListBox Grid.Row="2" x:Name="LogList" ItemsSource="{Binding FilteredLogs}" SelectedItem="{Binding SelectedLine, Mode=TwoWay}"
+                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                 EventToCommand.EventName="SelectionChanged" EventToCommand.Command="{Binding ScrollFilteredLogCommand}"
+                 EventToCommand.CommandParameter="{Binding #LogList}">
+            <ListBox.ItemTemplate>
+                <DataTemplate x:DataType="models:LogLine">
+                    <Grid ColumnDefinitions="92,84,*" ColumnSpacing="12" ToolTip.Tip="{Binding Text}">
+                        <TextBlock Text="{Binding Timestamp}" FontFamily="Cascadia Mono,Consolas,monospace" VerticalAlignment="Center" />
+                        <TextBlock Grid.Column="1" Text="{Binding LevelLabel}" Classes="level" Classes.info="{Binding IsInformation}" Classes.warning="{Binding IsWarning}" Classes.error="{Binding IsError}" Classes.debug="{Binding IsDebug}" FontWeight="Medium" VerticalAlignment="Center" />
+                        <TextBlock Grid.Column="2" Text="{Binding Message}" FontFamily="Cascadia Mono,Consolas,monospace" TextWrapping="Wrap" VerticalAlignment="Center" />
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <StackPanel Grid.Row="3" Orientation="Horizontal" Spacing="4" Margin="0,4,0,0" HorizontalAlignment="Right" Opacity="0.6">
+            <TextBlock Text="{Binding FilteredLogs.Count}" /><TextBlock Text="/" /><TextBlock Text="{Binding TotalCount}" />
+        </StackPanel>
+    </Grid>
+</UserControl>

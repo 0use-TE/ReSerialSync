@@ -1,0 +1,19 @@
+<UserControl xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:ReSerialSync.ViewModels" xmlns:icons="using:Material.Icons.Avalonia" x:Class="ReSerialSync.Views.ReceiveView" x:Name="ReceiveRoot" x:DataType="vm:ReceiveViewModel">
+    <Grid RowDefinitions="Auto,*" Margin="12,4,12,6" IsEnabled="{Binding Workspace.HasSelection}">
+        <WrapPanel ItemHeight="36" Margin="0,0,0,4">
+            <CheckBox VerticalAlignment="Center" Content="{Binding Text[HexDisplay]}" IsChecked="{Binding Session.ReceiveHex, Mode=TwoWay}" Margin="0,0,12,0" />
+            <CheckBox VerticalAlignment="Center" Content="{Binding Text[Timestamp]}" IsChecked="{Binding Session.ShowTimestamp, Mode=TwoWay}" Margin="0,0,12,0" />
+            <CheckBox VerticalAlignment="Center" Content="{Binding Text[AutoScroll]}" IsChecked="{Binding Session.AutoScroll, Mode=TwoWay}" Margin="0,0,12,0" />
+            <CheckBox VerticalAlignment="Center" Content="{Binding Text[Pause]}" IsChecked="{Binding Session.IsReceivePaused, Mode=TwoWay}" Margin="0,0,12,0" />
+            <Button Classes="icon" ToolTip.Tip="{Binding Text[Clear]}" Command="{Binding Session.ClearReceiveCommand}" Margin="0,0,8,0"><icons:MaterialIcon Kind="DeleteOutline" Width="20" Height="20" /></Button>
+            <Button Classes="icon" ToolTip.Tip="{Binding Text[Export]}" Command="{Binding Session.ExportReceiveCommand}" CommandParameter="{Binding #ReceiveRoot}"><icons:MaterialIcon Kind="Export" Width="20" Height="20" /></Button>
+        </WrapPanel>
+        <TextBox Classes="Bordered" Grid.Row="1" x:Name="ReceiveBox" Text="{Binding Session.ReceiveText, Mode=OneWay}"
+                 Padding="12" IsReadOnly="True" AcceptsReturn="True" TextWrapping="Wrap" FontFamily="Cascadia Mono,Consolas,monospace"
+                 VerticalAlignment="Stretch" HorizontalAlignment="Stretch" VerticalContentAlignment="Top"
+                 ScrollViewer.VerticalScrollBarVisibility="Auto"
+                 EventToCommand.EventName="TextChanged" EventToCommand.Command="{Binding Session.ScrollReceiveCommand}"
+                 EventToCommand.CommandParameter="{Binding #ReceiveBox}" />
+    </Grid>
+</UserControl>

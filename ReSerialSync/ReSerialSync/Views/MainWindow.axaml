@@ -1,0 +1,12 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:ReSerialSync.ViewModels"
+        xmlns:views="using:ReSerialSync.Views"
+        x:Class="ReSerialSync.Views.MainWindow"
+        x:DataType="vm:MainViewModel"
+        Width="{Binding WindowWidth, Mode=TwoWay}" Height="{Binding WindowHeight, Mode=TwoWay}"
+        WindowState="{Binding WindowState, Mode=TwoWay}" MinWidth="{Binding MinimumWindowWidth}" MinHeight="600"
+        Icon="/Assets/reserialsync.ico" Title="{Binding Text[WindowTitle]}"
+        Background="{DynamicResource SemiColorBackground0}">
+    <views:MainView x:Name="MainContent" DataContextChanged="OnMainContentDataContextChanged" />
+</Window>

@@ -1,0 +1,9 @@
+<UserControl xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:ReSerialSync.ViewModels" x:Class="ReSerialSync.Views.StyleView" x:DataType="vm:StyleViewModel">
+    <StackPanel Spacing="20" Margin="16,0,0,0">
+        <TextBlock Text="{Binding Text[Appearance]}" FontSize="18" FontWeight="SemiBold" />
+        <TextBlock Text="{Binding Text[TabHeader]}" FontWeight="Medium" />
+        <ToggleSwitch Content="{Binding Text[ClassicHeader]}" IsChecked="{Binding ClassicHeader, Mode=TwoWay}"
+                      OnContent="{Binding Text[Classic]}" OffContent="{Binding Text[Modern]}" />
+    </StackPanel>
+</UserControl>

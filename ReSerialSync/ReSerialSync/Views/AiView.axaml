@@ -1,0 +1,54 @@
+<UserControl xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:ReSerialSync.ViewModels" xmlns:models="using:ReSerialSync.Models"
+             xmlns:icons="using:Material.Icons.Avalonia" xmlns:md="using:LiveMarkdown.Avalonia"
+             xmlns:converters="using:ReSerialSync.Converters"
+             x:Class="ReSerialSync.Views.AiView" x:DataType="vm:AiViewModel">
+    <UserControl.KeyBindings><KeyBinding Gesture="Ctrl+Enter" Command="{Binding SendCommand}" /></UserControl.KeyBindings>
+    <Grid RowDefinitions="Auto,*,Auto" Margin="10,4,10,6">
+        <Grid ColumnDefinitions="*,Auto,Auto" ColumnSpacing="4" Margin="0,0,0,4">
+            <TextBlock Text="{Binding Session.PortName}" VerticalAlignment="Center" Opacity="0.65" />
+            <Button Grid.Column="1" Classes="icon" ToolTip.Tip="{Binding Text[AiNewChat]}" Command="{Binding ClearChatCommand}"><icons:MaterialIcon Kind="ChatPlusOutline" Width="18" Height="18" /></Button>
+            <Button Grid.Column="2" Classes="icon" ToolTip.Tip="{Binding Text[AiSettings]}" Command="{Binding OpenSettingsCommand}"><icons:MaterialIcon Kind="CogOutline" Width="18" Height="18" /></Button>
+        </Grid>
+        <StackPanel Grid.Row="1" x:Name="AiWelcome" IsVisible="{Binding IsChatEmpty}" VerticalAlignment="Center"
+                    HorizontalAlignment="Center" MaxWidth="280" Margin="12" Spacing="12">
+            <icons:MaterialIcon Kind="RobotOutline" Width="40" Height="40" HorizontalAlignment="Center" Opacity="0.7" />
+            <TextBlock Text="{Binding Text[AiWelcomeTitle]}" FontSize="18" FontWeight="SemiBold" TextAlignment="Center" TextWrapping="Wrap" />
+            <TextBlock Text="{Binding Text[AiWelcomeHint]}" TextAlignment="Center" TextWrapping="Wrap" Opacity="0.65" />
+            <StackPanel Spacing="6" Margin="0,6,0,0">
+                <Button Command="{Binding UsePromptCommand}" CommandParameter="{Binding Text[AiSuggestPorts]}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left">
+                    <StackPanel Orientation="Horizontal" Spacing="8"><icons:MaterialIcon Kind="Usb" Width="18" Height="18" /><TextBlock Text="{Binding Text[AiSuggestPorts]}" /></StackPanel>
+                </Button>
+                <Button Command="{Binding UsePromptCommand}" CommandParameter="{Binding Text[AiSuggestAnalyze]}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left">
+                    <StackPanel Orientation="Horizontal" Spacing="8"><icons:MaterialIcon Kind="TextBoxSearchOutline" Width="18" Height="18" /><TextBlock Text="{Binding Text[AiSuggestAnalyze]}" /></StackPanel>
+                </Button>
+            </StackPanel>
+        </StackPanel>
+        <ScrollViewer Grid.Row="1" x:Name="ChatScroll" IsVisible="{Binding !IsChatEmpty}" HorizontalScrollBarVisibility="Disabled">
+            <ItemsControl ItemsSource="{Binding Messages}" EventToCommand.EventName="SizeChanged" EventToCommand.Command="{Binding ScrollChatCommand}" EventToCommand.CommandParameter="{Binding #ChatScroll}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate x:DataType="models:AiChatEntry">
+                        <Border BorderBrush="{DynamicResource SemiColorBorder}" BorderThickness="0,0,0,1" Padding="0,8" Margin="0,0,0,4">
+                            <StackPanel Spacing="6">
+                                <StackPanel Orientation="Horizontal" Spacing="6">
+                                    <icons:MaterialIcon Kind="{Binding Icon}" Width="16" Height="16" />
+                                    <TextBlock Text="{Binding Author}" FontWeight="SemiBold" FontSize="12" />
+                                </StackPanel>
+                                <md:MarkdownRenderer MarkdownBuilder="{Binding Markdown}" CodeBlockColorTheme="{Binding $parent[UserControl].ActualThemeVariant, Converter={x:Static converters:MarkdownThemeConverter.Instance}}" />
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+        <Grid Grid.Row="2" RowDefinitions="*,Auto" Margin="0,6,0,0">
+            <TextBox Classes="Bordered" Text="{Binding Prompt, Mode=TwoWay}" AcceptsReturn="True" TextWrapping="Wrap"
+                     PlaceholderText="{Binding Text[AiPrompt]}" VerticalContentAlignment="Top"
+                     MinHeight="68" MaxHeight="140" MaxLength="16000" Padding="8,6" />
+            <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Spacing="4" Margin="0,4,0,0">
+                <Button Classes="icon" IsVisible="{Binding IsBusy}" ToolTip.Tip="{Binding Text[AiStop]}" Command="{Binding StopCommand}"><icons:MaterialIcon Kind="StopCircleOutline" Width="20" Height="20" /></Button>
+                <Button Classes="icon" ToolTip.Tip="{Binding Text[AiSend]}" Command="{Binding SendCommand}"><icons:MaterialIcon Kind="ArrowUp" Width="20" Height="20" /></Button>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>

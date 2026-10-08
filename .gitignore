@@ -1,0 +1,12 @@
+**/bin/
+**/obj/
+.vs/
+.build/
+*.user
+**/.pio/
+**/.vscode/
+artifacts/
+core
+core.*
+**/workspace.json
+**/*.log

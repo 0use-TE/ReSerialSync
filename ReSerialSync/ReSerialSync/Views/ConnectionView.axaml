@@ -1,0 +1,40 @@
+<UserControl xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:ReSerialSync.ViewModels" xmlns:models="using:ReSerialSync.Models"
+             x:Class="ReSerialSync.Views.ConnectionView" x:DataType="vm:ConnectionViewModel">
+    <UserControl.DataTemplates>
+        <DataTemplate DataType="models:LocalizedOption" x:DataType="models:LocalizedOption">
+            <TextBlock Text="{Binding Label}" />
+        </DataTemplate>
+    </UserControl.DataTemplates>
+    <ScrollViewer IsVisible="{Binding Workspace.HasSelection}" HorizontalScrollBarVisibility="Disabled">
+        <StackPanel Spacing="6" Margin="12,4,12,6">
+            <TextBlock Text="{Binding Session.PortName}" FontSize="16" FontWeight="SemiBold" />
+            <Grid ColumnDefinitions="84,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto" ColumnSpacing="12" RowSpacing="6">
+                <TextBlock Text="{Binding Text[BaudRate]}" VerticalAlignment="Top" Margin="0,6,0,0" />
+                <StackPanel Grid.Column="1" Spacing="4" IsEnabled="{Binding Session.CanConfigure}">
+                    <ComboBox x:Name="BaudRateSelector" ItemsSource="{Binding Text.BaudRates}"
+                              SelectedItem="{Binding Session.SelectedBaudRate, Mode=TwoWay}" HorizontalAlignment="Stretch" />
+                    <NumericUpDown x:Name="CustomBaudRateEditor" IsVisible="{Binding Session.IsCustomBaudRate}"
+                                   Value="{Binding Session.BaudRate, Mode=TwoWay}" Minimum="1" Maximum="4000000" FormatString="0" />
+                </StackPanel>
+                <TextBlock Grid.Row="1" Text="{Binding Text[DataBits]}" VerticalAlignment="Center" />
+                <ComboBox IsEnabled="{Binding Session.CanConfigure}" Grid.Row="1" Grid.Column="1" ItemsSource="{Binding Session.DataBitsOptions}" SelectedItem="{Binding Session.DataBits, Mode=TwoWay}" HorizontalAlignment="Stretch" />
+                <TextBlock Grid.Row="2" Text="{Binding Text[Parity]}" VerticalAlignment="Center" />
+                <ComboBox IsEnabled="{Binding Session.CanConfigure}" Grid.Row="2" Grid.Column="1" ItemsSource="{Binding Text.Parities}" SelectedItem="{Binding Session.SelectedParity, Mode=TwoWay}" HorizontalAlignment="Stretch" />
+                <TextBlock Grid.Row="3" Text="{Binding Text[StopBits]}" VerticalAlignment="Center" />
+                <ComboBox IsEnabled="{Binding Session.CanConfigure}" Grid.Row="3" Grid.Column="1" ItemsSource="{Binding Text.StopBits}" SelectedItem="{Binding Session.SelectedStopBits, Mode=TwoWay}" HorizontalAlignment="Stretch" />
+                <TextBlock Grid.Row="4" Text="{Binding Text[Handshake]}" VerticalAlignment="Center" />
+                <ComboBox IsEnabled="{Binding Session.CanConfigure}" Grid.Row="4" Grid.Column="1" ItemsSource="{Binding Text.Handshakes}" SelectedItem="{Binding Session.SelectedHandshake, Mode=TwoWay}" HorizontalAlignment="Stretch" />
+                <TextBlock Grid.Row="5" Text="{Binding Text[Encoding]}" VerticalAlignment="Center" />
+                <ComboBox Grid.Row="5" Grid.Column="1" ItemsSource="{Binding Session.Encodings}" SelectedItem="{Binding Session.EncodingName, Mode=TwoWay}" HorizontalAlignment="Stretch" />
+            </Grid>
+            <WrapPanel IsEnabled="{Binding Session.CanConfigure}">
+                <CheckBox Content="DTR" IsChecked="{Binding Session.DtrEnable, Mode=TwoWay}" Margin="0,0,16,0" />
+                <CheckBox Content="RTS" IsChecked="{Binding Session.RtsEnable, Mode=TwoWay}" />
+            </WrapPanel>
+            <Button Content="{Binding Session.ConnectionAction}" IsEnabled="{Binding Session.CanConnect}"
+                    Command="{Binding Session.ToggleConnectionCommand}" HorizontalAlignment="Stretch" />
+
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

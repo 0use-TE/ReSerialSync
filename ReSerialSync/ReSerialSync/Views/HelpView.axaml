@@ -1,0 +1,25 @@
+<UserControl xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:ReSerialSync.ViewModels" x:Class="ReSerialSync.Views.HelpView" x:Name="HelpRoot" x:DataType="vm:HelpViewModel">
+    <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+        <StackPanel Spacing="12" Margin="0,0,12,0">
+            <TextBlock Text="{Binding Text[GuideHeading]}" FontSize="18" FontWeight="SemiBold" />
+            <TextBlock Text="{Binding Text[GuideConnect]}" FontWeight="SemiBold" />
+            <TextBlock Text="{Binding Text[GuideConnectBody]}" TextWrapping="Wrap" />
+            <TextBlock Text="{Binding Text[GuideData]}" FontWeight="SemiBold" />
+            <TextBlock Text="{Binding Text[GuideDataBody]}" TextWrapping="Wrap" />
+            <TextBlock Text="{Binding Text[GuideReceive]}" FontWeight="SemiBold" />
+            <TextBlock Text="{Binding Text[GuideReceiveBody]}" TextWrapping="Wrap" />
+            <TextBlock Text="{Binding Text[GuideSave]}" FontWeight="SemiBold" />
+            <TextBlock Text="{Binding Text[GuideSaveBody]}" TextWrapping="Wrap" />
+            <Separator Margin="0,8" />
+            <TextBlock Text="{Binding Text[AboutHeading]}" FontSize="18" FontWeight="SemiBold" />
+            <TextBlock Text="{Binding Text[AuthorName]}" FontWeight="SemiBold" />
+            <TextBlock Text="{Binding Text[AuthorIntro]}" TextWrapping="Wrap" />
+            <WrapPanel>
+                <Button Content="{Binding Text[Website]}" Command="{Binding OpenWebsiteCommand}" CommandParameter="{Binding #HelpRoot}" Margin="0,0,8,0" />
+                <Button Content="{Binding Text[GitHub]}" Command="{Binding OpenGitHubCommand}" CommandParameter="{Binding #HelpRoot}" />
+            </WrapPanel>
+            <Button Content="{Binding Repository}" Command="{Binding OpenRepositoryCommand}" CommandParameter="{Binding #HelpRoot}" HorizontalAlignment="Left" />
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

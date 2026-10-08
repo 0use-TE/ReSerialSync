@@ -1,0 +1,24 @@
+<UserControl xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:ReSerialSync.ViewModels" xmlns:icons="using:Material.Icons.Avalonia"
+             x:Class="ReSerialSync.Views.PortsView" x:DataType="vm:PortsViewModel">
+    <Grid RowDefinitions="Auto,*" Margin="4">
+        <Button Classes="icon" HorizontalAlignment="Right" Margin="0,0,0,4"
+                ToolTip.Tip="{Binding Text[Refresh]}" Command="{Binding Workspace.RefreshPortsCommand}">
+            <icons:MaterialIcon Kind="Refresh" Width="20" Height="20" />
+        </Button>
+        <ListBox Grid.Row="1" x:Name="PortList" ItemsSource="{Binding Workspace.Ports}"
+                 SelectedItem="{Binding Workspace.SelectedPort, Mode=TwoWay}" ScrollViewer.VerticalScrollBarVisibility="Auto">
+            <ListBox.ItemTemplate>
+                <DataTemplate x:DataType="vm:SerialSessionViewModel">
+                    <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="8" Margin="0,4">
+                        <icons:MaterialIcon Kind="Usb" Width="18" Height="18" VerticalAlignment="Center" Opacity="0.7" />
+                        <TextBlock Grid.Column="1" Text="{Binding PortName}" FontWeight="Medium" VerticalAlignment="Center" />
+                        <TextBlock Grid.Column="2" Text="{Binding StateLabel}" Opacity="0.65" FontSize="12" VerticalAlignment="Center" />
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <TextBlock Grid.Row="1" Text="{Binding Text[NoPorts]}" IsVisible="{Binding !Workspace.HasPorts}"
+                   HorizontalAlignment="Center" VerticalAlignment="Center" Opacity="0.6" IsHitTestVisible="False" />
+    </Grid>
+</UserControl>

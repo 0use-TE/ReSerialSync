@@ -1,0 +1,12 @@
+<Solution>
+  <Project Path="ReSerialSync/ReSerialSync.Android/ReSerialSync.Android.csproj">
+    <Deploy />
+  </Project>
+  <Project Path="ReSerialSync/ReSerialSync.Browser/ReSerialSync.Browser.csproj" />
+  <Project Path="ReSerialSync/ReSerialSync.Desktop/ReSerialSync.Desktop.csproj" />
+  <Project Path="ReSerialSync/ReSerialSync.iOS/ReSerialSync.iOS.csproj">
+    <Deploy />
+  </Project>
+  <Project Path="ReSerialSync/ReSerialSync.Tests/ReSerialSync.Tests.csproj" />
+  <Project Path="ReSerialSync/ReSerialSync/ReSerialSync.csproj" />
+</Solution>

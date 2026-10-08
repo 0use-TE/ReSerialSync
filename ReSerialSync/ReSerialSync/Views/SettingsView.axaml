@@ -1,0 +1,19 @@
+<UserControl xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:ReSerialSync.ViewModels" xmlns:icons="using:Material.Icons.Avalonia"
+             x:Class="ReSerialSync.Views.SettingsView" x:DataType="vm:SettingsViewModel">
+    <Grid ColumnDefinitions="150,Auto,*">
+        <ListBox SelectedIndex="{Binding SelectedSection, Mode=TwoWay}" Margin="0,0,12,0">
+            <ListBoxItem>
+                <StackPanel Orientation="Horizontal" Spacing="8"><icons:MaterialIcon Kind="PaletteOutline" Width="18" Height="18" /><TextBlock Text="{Binding Text[Appearance]}" /></StackPanel>
+            </ListBoxItem>
+            <ListBoxItem>
+                <StackPanel Orientation="Horizontal" Spacing="8"><icons:MaterialIcon Kind="BookOpenPageVariantOutline" Width="18" Height="18" /><TextBlock Text="{Binding Text[Help]}" /></StackPanel>
+            </ListBoxItem>
+            <ListBoxItem>
+                <StackPanel Orientation="Horizontal" Spacing="8"><icons:MaterialIcon Kind="RobotOutline" Width="18" Height="18" /><TextBlock Text="{Binding Text[AI]}" /></StackPanel>
+            </ListBoxItem>
+        </ListBox>
+        <Border Grid.Column="1" Width="1" Background="{DynamicResource SemiColorBorder}" Margin="0,0,16,0" />
+        <ContentControl Grid.Column="2" Content="{Binding Content}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" />
+    </Grid>
+</UserControl>

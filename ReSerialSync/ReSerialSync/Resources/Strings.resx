@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <data name="Ports" xml:space="preserve"><value>串口</value></data>
+  <data name="Refresh" xml:space="preserve"><value>刷新</value></data>
+  <data name="NoPorts" xml:space="preserve"><value>未发现串口</value></data>
+  <data name="SelectPort" xml:space="preserve"><value>选择串口</value></data>
+  <data name="Unavailable" xml:space="preserve"><value>离线</value></data>
+  <data name="Connected" xml:space="preserve"><value>已连接</value></data>
+  <data name="Disconnected" xml:space="preserve"><value>未连接</value></data>
+  <data name="Connecting" xml:space="preserve"><value>处理中</value></data>
+  <data name="Configuration" xml:space="preserve"><value>配置</value></data>
+  <data name="Receive" xml:space="preserve"><value>接收</value></data>
+  <data name="SendPanel" xml:space="preserve"><value>发送</value></data>
+  <data name="Logs" xml:space="preserve"><value>日志</value></data>
+  <data name="BaudRate" xml:space="preserve"><value>波特率</value></data>
+  <data name="CustomBaudRate" xml:space="preserve"><value>自定义</value></data>
+  <data name="AiWelcomeTitle" xml:space="preserve"><value>今天我能如何帮助您？</value></data>
+  <data name="AiWelcomeHint" xml:space="preserve"><value>连接串口、分析数据，或一起排查问题。</value></data>
+  <data name="AiSuggestPorts" xml:space="preserve"><value>查看可用串口</value></data>
+  <data name="AiSuggestAnalyze" xml:space="preserve"><value>分析当前串口数据</value></data>
+  <data name="DataBits" xml:space="preserve"><value>数据位</value></data>
+  <data name="Parity" xml:space="preserve"><value>校验</value></data>
+  <data name="StopBits" xml:space="preserve"><value>停止位</value></data>
+  <data name="Handshake" xml:space="preserve"><value>流控</value></data>
+  <data name="Encoding" xml:space="preserve"><value>编码</value></data>
+  <data name="Connect" xml:space="preserve"><value>连接</value></data>
+  <data name="Disconnect" xml:space="preserve"><value>断开</value></data>
+  <data name="HexDisplay" xml:space="preserve"><value>HEX</value></data>
+  <data name="Timestamp" xml:space="preserve"><value>时间戳</value></data>
+  <data name="AutoScroll" xml:space="preserve"><value>自动滚动</value></data>
+  <data name="Pause" xml:space="preserve"><value>暂停</value></data>
+  <data name="Clear" xml:space="preserve"><value>清空</value></data>
+  <data name="Export" xml:space="preserve"><value>导出</value></data>
+  <data name="LineEnding" xml:space="preserve"><value>行尾</value></data>
+  <data name="Send" xml:space="preserve"><value>发送</value></data>
+  <data name="Interval" xml:space="preserve"><value>间隔 (ms)</value></data>
+  <data name="StartTimer" xml:space="preserve"><value>定时发送</value></data>
+  <data name="StopTimer" xml:space="preserve"><value>停止定时</value></data>
+  <data name="ResetCounters" xml:space="preserve"><value>清零</value></data>
+  <data name="ResetLayout" xml:space="preserve"><value>重置布局</value></data>
+  <data name="DarkTheme" xml:space="preserve"><value>切换暗色</value></data>
+  <data name="LightTheme" xml:space="preserve"><value>切换明亮</value></data>
+  <data name="SwitchLanguage" xml:space="preserve"><value>Switch to English</value></data>
+  <data name="Help" xml:space="preserve"><value>教程与关于</value></data>
+  <data name="Close" xml:space="preserve"><value>关闭</value></data>
+  <data name="WindowTitle" xml:space="preserve"><value>ReSerialSync · 串口调试</value></data>
+  <data name="SendPlaceholder" xml:space="preserve"><value>输入发送内容</value></data>
+  <data name="HexPlaceholder" xml:space="preserve"><value>01 AF 0D 0A</value></data>
+  <data name="ExportTitle" xml:space="preserve"><value>导出调试记录</value></data>
+  <data name="Exported" xml:space="preserve"><value>导出成功</value></data>
+  <data name="StorageUnsupported" xml:space="preserve"><value>当前平台无法保存文件</value></data>
+  <data name="PortRequired" xml:space="preserve"><value>请选择串口</value></data>
+  <data name="InvalidBaud" xml:space="preserve"><value>波特率范围为 1–4000000</value></data>
+  <data name="EmptyPayload" xml:space="preserve"><value>发送内容为空</value></data>
+  <data name="HexLength" xml:space="preserve"><value>HEX 必须使用完整的两位字节</value></data>
+  <data name="HexCharacters" xml:space="preserve"><value>HEX 只能包含 0–9、A–F 和空白</value></data>
+  <data name="InvalidPayload" xml:space="preserve"><value>发送内容无效</value></data>
+  <data name="ConnectionFailed" xml:space="preserve"><value>连接失败</value></data>
+  <data name="SendFailed" xml:space="preserve"><value>发送失败</value></data>
+  <data name="PortFault" xml:space="preserve"><value>串口错误</value></data>
+  <data name="RefreshFailed" xml:space="preserve"><value>刷新失败</value></data>
+  <data name="ExportFailed" xml:space="preserve"><value>导出失败</value></data>
+  <data name="InvalidInterval" xml:space="preserve"><value>发送间隔范围为 20–3600000 ms</value></data>
+  <data name="DisplayOverflow" xml:space="preserve"><value>部分显示已跳过，完整数据见日志</value></data>
+  <data name="LogTruncated" xml:space="preserve"><value>完整记录见日志文件</value></data>
+  <data name="SettingsFailed" xml:space="preserve"><value>配置保存失败</value></data>
+  <data name="SettingsRestoreFailed" xml:space="preserve"><value>配置读取失败，已使用默认设置</value></data>
+  <data name="UnsupportedPlatform" xml:space="preserve"><value>请使用桌面版连接串口</value></data>
+  <data name="GuideHeading" xml:space="preserve"><value>使用教程</value></data>
+  <data name="GuideConnect" xml:space="preserve"><value>连接与多串口</value></data>
+  <data name="GuideConnectBody" xml:space="preserve"><value>左侧显示本机串口。点击选择，设置参数后连接；可同时连接多个串口，切换选择不会中断其他连接。</value></data>
+  <data name="GuideData" xml:space="preserve"><value>收发数据</value></data>
+  <data name="GuideDataBody" xml:space="preserve"><value>文本按所选编码发送；HEX 使用两位字节，可由空格分隔。行尾追加 CR、LF 或 CRLF。定时发送按毫秒间隔重复，断开或出错会停止。</value></data>
+  <data name="GuideReceive" xml:space="preserve"><value>接收与日志</value></data>
+  <data name="GuideReceiveBody" xml:space="preserve"><value>暂停只暂停显示。接收区保留最近 256K 字符，可清空或导出；各串口数据和错误写入 Serilog 日志，日志按天和大小滚动，保留最近 30 个文件。</value></data>
+  <data name="GuideSave" xml:space="preserve"><value>自动保存</value></data>
+  <data name="GuideSaveBody" xml:space="preserve"><value>每个串口分别记住配置和发送内容；布局、主题、语言和当前串口自动保存。重启后手动连接，定时发送不会自动启动。</value></data>
+  <data name="AboutHeading" xml:space="preserve"><value>关于作者</value></data>
+  <data name="AuthorName" xml:space="preserve"><value>Ouse · 从0到use</value></data>
+  <data name="AuthorIntro" xml:space="preserve"><value>热爱 .NET 的开发者，专注 C#、ASP.NET Core 与 Avalonia。Crystal.Avalonia、GOZA.Dock 等开源项目作者。</value></data>
+  <data name="Website" xml:space="preserve"><value>个人主页</value></data>
+  <data name="GitHub" xml:space="preserve"><value>GitHub</value></data>
+  <data name="RepositoryPending" xml:space="preserve"><value>ReSerialSync 将在 GitHub 开源，仓库地址待发布。</value></data>
+  <data name="None" xml:space="preserve"><value>无</value></data>
+  <data name="Odd" xml:space="preserve"><value>奇校验</value></data>
+  <data name="Even" xml:space="preserve"><value>偶校验</value></data>
+  <data name="Mark" xml:space="preserve"><value>标记校验</value></data>
+  <data name="Space" xml:space="preserve"><value>空格校验</value></data>
+  <data name="One" xml:space="preserve"><value>1</value></data>
+  <data name="OnePointFive" xml:space="preserve"><value>1.5</value></data>
+  <data name="Two" xml:space="preserve"><value>2</value></data>
+  <data name="SoftwareFlow" xml:space="preserve"><value>软件流控</value></data>
+  <data name="HardwareFlow" xml:space="preserve"><value>硬件流控</value></data>
+  <data name="CombinedFlow" xml:space="preserve"><value>软硬件流控</value></data>
+  <data name="ConnectFirst" xml:space="preserve"><value>请先连接串口</value></data>
+  <data name="Settings" xml:space="preserve"><value>设置</value></data>
+  <data name="Appearance" xml:space="preserve"><value>样式</value></data>
+  <data name="TabHeader" xml:space="preserve"><value>标签头</value></data>
+  <data name="ClassicHeader" xml:space="preserve"><value>经典标签头（直角，无面板间隙）</value></data>
+  <data name="Classic" xml:space="preserve"><value>经典</value></data>
+  <data name="Modern" xml:space="preserve"><value>现代</value></data>
+  <data name="AllLevels" xml:space="preserve"><value>全部等级</value></data>
+  <data name="NoLevels" xml:space="preserve"><value>未选择等级</value></data>
+  <data name="LogVerbose" xml:space="preserve"><value>详细</value></data>
+  <data name="LogDebug" xml:space="preserve"><value>调试</value></data>
+  <data name="LogInformation" xml:space="preserve"><value>信息</value></data>
+  <data name="LogWarning" xml:space="preserve"><value>警告</value></data>
+  <data name="LogError" xml:space="preserve"><value>错误</value></data>
+  <data name="LogFatal" xml:space="preserve"><value>致命</value></data>
+  <data name="AppStarted" xml:space="preserve"><value>软件已成功启动</value></data>
+  <data name="LogSearch" xml:space="preserve"><value>搜索日志</value></data>
+  <data name="LogTime" xml:space="preserve"><value>时间</value></data>
+  <data name="LogLevel" xml:space="preserve"><value>等级</value></data>
+  <data name="LogMessage" xml:space="preserve"><value>内容</value></data>
+  <data name="AI" xml:space="preserve"><value>AI 助手</value></data>
+  <data name="AiAddress" xml:space="preserve"><value>API 地址（OpenAI 兼容）</value></data>
+  <data name="AiModel" xml:space="preserve"><value>模型</value></data>
+  <data name="AiConfigureFirst" xml:space="preserve"><value>请在设置中填写 API 地址和模型。</value></data>
+  <data name="AiYou" xml:space="preserve"><value>你</value></data>
+  <data name="AiTool" xml:space="preserve"><value>串口操作</value></data>
+  <data name="AiPrompt" xml:space="preserve"><value>描述场景或串口操作…</value></data>
+  <data name="AiSend" xml:space="preserve"><value>发送（Ctrl+Enter）</value></data>
+  <data name="AiStop" xml:space="preserve"><value>停止</value></data>
+  <data name="AiStopped" xml:space="preserve"><value>已停止</value></data>
+  <data name="AiNewChat" xml:space="preserve"><value>新对话</value></data>
+  <data name="AiSettings" xml:space="preserve"><value>AI 设置</value></data>
+  <data name="AiRequestFailed" xml:space="preserve"><value>AI 请求失败，请检查地址、模型、密钥和网络后重试。</value></data>
+  <data name="AiPromptTooLong" xml:space="preserve"><value>消息太长，请缩短后发送。</value></data>
+  <data name="CompactMode" xml:space="preserve"><value>精简模式</value></data>
+  <data name="FullMode" xml:space="preserve"><value>完整模式</value></data>
+</root>

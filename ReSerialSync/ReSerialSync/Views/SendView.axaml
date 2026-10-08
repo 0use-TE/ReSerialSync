@@ -1,0 +1,25 @@
+<UserControl xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:ReSerialSync.ViewModels" xmlns:icons="using:Material.Icons.Avalonia" xmlns:models="using:ReSerialSync.Models"
+             x:Class="ReSerialSync.Views.SendView" x:DataType="vm:SendViewModel">
+    <UserControl.DataTemplates>
+        <DataTemplate DataType="models:LocalizedOption" x:DataType="models:LocalizedOption">
+            <TextBlock Text="{Binding Label}" />
+        </DataTemplate>
+    </UserControl.DataTemplates>
+    <Grid RowDefinitions="Auto,*,Auto" Margin="12,4,12,6" IsEnabled="{Binding Workspace.HasSelection}">
+        <WrapPanel ItemHeight="36" Margin="0,0,0,4">
+            <CheckBox VerticalAlignment="Center" Content="HEX" IsChecked="{Binding Session.SendHex, Mode=TwoWay}" Margin="0,0,16,0" />
+            <TextBlock Text="{Binding Text[LineEnding]}" VerticalAlignment="Center" Margin="0,0,8,0" />
+            <ComboBox VerticalAlignment="Center" Height="36" ItemsSource="{Binding Text.LineEndings}" SelectedItem="{Binding Session.SelectedLineEnding, Mode=TwoWay}" Width="100" />
+        </WrapPanel>
+        <TextBox Classes="Bordered" Grid.Row="1" Text="{Binding Session.SendText, Mode=TwoWay}" AcceptsReturn="True" TextWrapping="Wrap" Padding="12"
+                 VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="Cascadia Mono,Consolas,monospace"
+                 VerticalContentAlignment="Top" MaxLength="65536" PlaceholderText="{Binding Session.SendPlaceholder}" />
+        <WrapPanel ItemHeight="36" Grid.Row="2" Margin="0,4,0,0">
+            <Button Height="36" VerticalAlignment="Center" Content="{Binding Text[Send]}" IsEnabled="{Binding Session.IsConnected}" Command="{Binding Session.SendCommand}" Margin="0,0,12,0" />
+            <TextBlock Text="{Binding Text[Interval]}" VerticalAlignment="Center" Margin="0,0,8,0" />
+            <NumericUpDown Height="36" VerticalAlignment="Center" Value="{Binding Session.IntervalMs, Mode=TwoWay}" Minimum="20" Maximum="3600000" FormatString="0" Width="130" Margin="0,0,12,0" />
+            <Button Height="36" VerticalAlignment="Center" Content="{Binding Session.TimerAction}" IsEnabled="{Binding Session.IsConnected}" Command="{Binding Session.ToggleAutoSendCommand}" />
+        </WrapPanel>
+    </Grid>
+</UserControl>

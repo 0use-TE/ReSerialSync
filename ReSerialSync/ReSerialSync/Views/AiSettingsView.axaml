@@ -1,0 +1,12 @@
+<UserControl xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:ReSerialSync.ViewModels" x:Class="ReSerialSync.Views.AiSettingsView" x:DataType="vm:AiSettingsViewModel">
+    <StackPanel Spacing="12">
+        <TextBlock Text="{Binding Text[AI]}" FontSize="18" FontWeight="SemiBold" />
+        <TextBlock Text="{Binding Text[AiAddress]}" />
+        <TextBox Classes="Bordered" Text="{Binding Address, Mode=TwoWay}" PlaceholderText="https://api.openai.com/v1" />
+        <TextBlock Text="{Binding Text[AiModel]}" />
+        <TextBox Classes="Bordered" Text="{Binding Model, Mode=TwoWay}" />
+        <TextBlock Text="API Key" />
+        <TextBox Classes="Bordered" Text="{Binding ApiKey, Mode=TwoWay}" PasswordChar="●" />
+    </StackPanel>
+</UserControl>
