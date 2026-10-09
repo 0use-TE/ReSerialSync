@@ -94,10 +94,16 @@ The rewrite draws its UI with Avalonia, removes the WebView and uses Native AOT 
 
 ### Memory
 
-![Memory usage during ongoing serial communication](../media/windows-memory-serial.png)
+| Version | Main process | WebView2 process group | Total |
+| --- | ---: | ---: | ---: |
+| Original Blazor Hybrid app | 53.2 MB | 154.7 MB | **207.9 MB** |
+| Avalonia AOT rewrite | 87.9 MB | None | **87.9 MB** |
 
-With COM7 connected, one-second timed sends, incoming replies and log updates, Task Manager shows **87.9 MB**.
-The original application's memory usage under the same conditions still needs to be measured.
+The original app's total includes the highlighted WebView2 group; its ownership still needs confirmation. The original app has COM7 connected, while the rewrite sends every second, receives replies and updates logs. These screenshots show different workloads.
+
+![Original app and highlighted WebView2 process group](../media/windows-memory-blazor-hybrid.png)
+
+![Rewrite memory usage during ongoing serial communication](../media/windows-memory-serial.png)
 
 ### Startup
 
@@ -176,6 +182,6 @@ I also took this photograph at the Avalonia booth during .NET Conf in 2025.
 Later, I was lucky enough to win a Huawei MatePad Edge in an official Avalonia giveaway.
 
 From learning Avalonia to writing libraries and rebuilding this tool, I now have a cross-platform application for everyday use.
-Next, I will complete the original application's memory comparison and keep improving the tool while debugging real devices.
+Next, I will repeat the memory measurements under matching conditions and keep improving the tool while debugging real devices.
 
 Thank you to the Avalonia team, the community and the authors of the open-source components. Let's keep building useful cross-platform applications together!
