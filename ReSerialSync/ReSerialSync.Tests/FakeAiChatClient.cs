@@ -23,6 +23,12 @@ public sealed class FakeAiChatClient : IChatClient
         ToolCount = options?.Tools?.Count ?? 0;
         if (user.Text == "cancel-test") await Task.Delay(Timeout.Infinite, cancellationToken);
         if (user.Text == "failure-test") throw new HttpRequestException("Fake provider failure");
+        if (user.Text == "send-test" && !afterUser.Any(m => m.Role == ChatRole.Tool))
+        {
+            var name = options!.Tools!.OfType<AIFunction>().Single(f => f.Name.Contains("SendPrepared", StringComparison.OrdinalIgnoreCase)).Name;
+            yield return new ChatResponseUpdate(ChatRole.Assistant, [new FunctionCallContent("send-call", name, new Dictionary<string, object?> { ["portName"] = "COM2" })]) { FinishReason = ChatFinishReason.ToolCalls };
+            yield break;
+        }
         if (user.Text == "connect-test" && !afterUser.Any(m => m.Role == ChatRole.Tool))
         {
             var name = options!.Tools!.OfType<AIFunction>().First(f => f.Name.Contains("Connect", StringComparison.OrdinalIgnoreCase) && !f.Name.Contains("Disconnect", StringComparison.OrdinalIgnoreCase)).Name;

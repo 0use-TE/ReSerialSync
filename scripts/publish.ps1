@@ -10,8 +10,13 @@ dotnet publish (Join-Path $repoRoot 'ReSerialSync/ReSerialSync.Desktop/ReSerialS
 if ($LASTEXITCODE -ne 0) { throw 'Native AOT publish failed.' }
 Get-ChildItem -LiteralPath $packageRoot -File | Where-Object { $_.Extension -in '.pdb','.dbg' } | Remove-Item
 Copy-Item -LiteralPath (Join-Path $repoRoot 'LICENSE') -Destination $packageRoot
-Copy-Item -LiteralPath (Join-Path $repoRoot 'docs/releases.md') -Destination (Join-Path $packageRoot 'RUNNING.md')
-Copy-Item -LiteralPath (Join-Path $repoRoot 'docs/third-party-notices.md') -Destination (Join-Path $packageRoot 'THIRD-PARTY-NOTICES.md')
+Copy-Item -LiteralPath (Join-Path $repoRoot 'docs/en/releases.md') -Destination (Join-Path $packageRoot 'RUNNING.md')
+Copy-Item -LiteralPath (Join-Path $repoRoot 'docs/zh-CN/releases.md') -Destination (Join-Path $packageRoot 'RUNNING.zh-CN.md')
+foreach ($docLanguage in @('en','zh-CN')) {
+    $noticeFile = if ($docLanguage -eq 'en') { 'THIRD-PARTY-NOTICES.md' } else { 'THIRD-PARTY-NOTICES.zh-CN.md' }
+    $noticeText = Get-Content -LiteralPath (Join-Path $repoRoot "docs/$docLanguage/third-party-notices.md") -Raw
+    Set-Content -LiteralPath (Join-Path $packageRoot $noticeFile) -Value $noticeText.Replace('(../licenses','(licenses') -Encoding utf8
+}
 Copy-Item -LiteralPath (Join-Path $repoRoot 'docs/licenses') -Destination (Join-Path $packageRoot 'licenses') -Recurse
 $archive = Join-Path $repoRoot "artifacts/$packageName.zip"
 Compress-Archive -LiteralPath $packageRoot -DestinationPath $archive

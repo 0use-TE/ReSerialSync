@@ -1,13 +1,13 @@
-# Third-party dependency notices
+# 第三方依赖声明
 
-ReSerialSync source is MIT licensed. Dependencies retain their respective licences.
-This inventory is generated from the resolved Desktop NuGet graph, including build-time packages.
-Embedded licence files supplied by packages are preserved in [licenses](licenses/).
-For native dependencies bundled by StaticLink.Avalonia, also consult its upstream notices.
+ReSerialSync 源码使用 MIT 许可证，第三方依赖保留各自的许可证。
+本清单来自 Desktop 项目实际还原的 NuGet 依赖图，也包含构建时依赖。
+上游包中提供的许可证文件保存在 [licenses](../licenses/)；文件保留原文，不翻译法律文本。
+StaticLink.Avalonia 打包的原生依赖还应参考其上游声明。
 
-| Package | Version | Declared licence |
+| 包 | 版本 | 声明的许可证 |
 | --- | --- | --- |
-| [Avalonia.Angle.Windows.Natives](https://www.nuget.org/packages/Avalonia.Angle.Windows.Natives/2.1.25547.20250602) | 2.1.25547.20250602 | [Embedded licence](licenses/Avalonia.Angle.Windows.Natives-2.1.25547.20250602-LICENSE) |
+| [Avalonia.Angle.Windows.Natives](https://www.nuget.org/packages/Avalonia.Angle.Windows.Natives/2.1.25547.20250602) | 2.1.25547.20250602 | [上游许可证原文](../licenses/Avalonia.Angle.Windows.Natives-2.1.25547.20250602-LICENSE) |
 | [Avalonia.BuildServices](https://www.nuget.org/packages/Avalonia.BuildServices/11.3.2) | 11.3.2 | MIT |
 | [Avalonia.Desktop](https://www.nuget.org/packages/Avalonia.Desktop/12.0.0) | 12.0.0 | MIT |
 | [Avalonia.Fonts.Inter](https://www.nuget.org/packages/Avalonia.Fonts.Inter/12.0.0) | 12.0.0 | MIT |
@@ -21,7 +21,7 @@ For native dependencies bundled by StaticLink.Avalonia, also consult its upstrea
 | [Avalonia.X11](https://www.nuget.org/packages/Avalonia.X11/12.0.0) | 12.0.0 | MIT |
 | [Avalonia](https://www.nuget.org/packages/Avalonia/12.0.0) | 12.0.0 | MIT |
 | [CommunityToolkit.Mvvm](https://www.nuget.org/packages/CommunityToolkit.Mvvm/8.4.2) | 8.4.2 | MIT |
-| [Crystal.Avalonia](https://www.nuget.org/packages/Crystal.Avalonia/3.1.1) | 3.1.1 | [Embedded licence](licenses/Crystal.Avalonia-3.1.1-LICENSE) |
+| [Crystal.Avalonia](https://www.nuget.org/packages/Crystal.Avalonia/3.1.1) | 3.1.1 | [上游许可证原文](../licenses/Crystal.Avalonia-3.1.1-LICENSE) |
 | [DotKernel](https://www.nuget.org/packages/DotKernel/1.0.1) | 1.0.1 | MIT |
 | [GOZA.Dock](https://www.nuget.org/packages/GOZA.Dock/3.0.9) | 3.0.9 | MIT |
 | [HarfBuzzSharp.NativeAssets.Linux](https://www.nuget.org/packages/HarfBuzzSharp.NativeAssets.Linux/8.3.1.3) | 8.3.1.3 | MIT |

@@ -310,6 +310,40 @@ try
     secondSerial.Fail(new IOException("test device fault")); Pump();
     Check(!second.IsConnected && shown.Last().Type == NotificationType.Error, "Device faults close the session and show a notification");
 
+    var previousEditor = (second.SendText, second.SendHex, second.LineEnding);
+    var previousPrompt = ai.Prompt;
+    var aiWriteCount = secondSerial.Writes;
+    try { Run(plugin.SendPreparedAsync("COM2", CancellationToken.None)); throw new Exception("Disconnected AI send accepted"); }
+    catch (InvalidOperationException) { Check(secondSerial.Writes == aiWriteCount, "AI sending rejects a disconnected port without transmitting"); }
+    Run(plugin.ConnectAsync("COM2", CancellationToken.None));
+    second.LineEnding = "CRLF";
+    Run(plugin.PrepareSendAsync("COM2", "01 AF", true, CancellationToken.None));
+    var otherWrites = firstSerial.Writes;
+    ai.Prompt = "send-test"; Run(ai.SendCommand.ExecuteAsync(null));
+    Check(secondSerial.Writes == aiWriteCount + 1 && secondSerial.LastWrite!.SequenceEqual(new byte[] { 1, 175, 13, 10 })
+        && firstSerial.Writes == otherWrites && ai.Messages.Any(m => m.IsTool && m.Markdown.ToString().Contains("Sent 4 bytes to COM2")),
+        "AI tool calling writes the prepared HEX and line ending exactly once to the requested port and reports the result");
+    second.SendText = "Z1";
+    try { Run(plugin.SendPreparedAsync("COM2", CancellationToken.None)); throw new Exception("Invalid HEX AI send accepted"); }
+    catch (Exception ex) when (ex is SerialInputException or ArgumentException)
+    { Check(secondSerial.Writes == aiWriteCount + 1, "AI rejects invalid HEX before transmitting"); }
+    second.SendText = "hello,world"; second.SendHex = false; second.LineEnding = "None";
+    using (var canceledSend = new CancellationTokenSource())
+    {
+        canceledSend.Cancel();
+        try { Run(plugin.SendPreparedAsync("COM2", canceledSend.Token)); throw new Exception("Canceled AI send accepted"); }
+        catch (OperationCanceledException) { Check(secondSerial.Writes == aiWriteCount + 1, "Canceled AI send does not transmit"); }
+    }
+    secondSerial.WriteError = new IOException("test write failure");
+    string? failedSend = null;
+    Run(Task.Run(async () => failedSend = await plugin.SendPreparedAsync("COM2", CancellationToken.None)));
+    Check(failedSend!.StartsWith("Send failed") && !second.IsConnected && secondSerial.Writes == aiWriteCount + 1,
+        "AI reports transport write failure instead of success and does not retry");
+    secondSerial.WriteError = null;
+    (second.SendText, second.SendHex, second.LineEnding) = previousEditor;
+    ai.ClearChatCommand.Execute(null);
+    ai.Prompt = previousPrompt;
+
     var tab = vm.RightTabs.First(t => t.Id == "logs");
     vm.RightTabs.Remove(tab); vm.TopTabs.Add(tab); vm.TopSelected = tab;
     var portsTab = vm.LeftTabs.Single(); vm.LeftTabs.Remove(portsTab); vm.TopTabs.Add(portsTab);
@@ -398,6 +432,7 @@ public sealed class FakeSerialFactory : ISerialPortFactory
 
 public sealed class FakeSerialPort : ISerialPortService
 {
+    public Exception? WriteError { get; set; }
     public bool IsSupported => true;
     public int Writes { get; private set; }
     public byte[]? LastWrite { get; private set; }
@@ -406,7 +441,7 @@ public sealed class FakeSerialPort : ISerialPortService
     public string[] GetPortNames() => [];
     public Task OpenAsync(SerialSettings settings) => Task.CompletedTask;
     public Task CloseAsync() => Task.CompletedTask;
-    public Task WriteAsync(byte[] bytes) { Writes++; LastWrite = bytes; return Task.CompletedTask; }
+    public Task WriteAsync(byte[] bytes) { if (WriteError is not null) return Task.FromException(WriteError); Writes++; LastWrite = bytes; return Task.CompletedTask; }
     public void Receive(byte[] bytes) => Received?.Invoke(bytes);
     public void Fail(Exception error) => Faulted?.Invoke(error);
     public void Dispose() { }

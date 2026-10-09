@@ -12,8 +12,10 @@ dotnet publish "$repo_root/ReSerialSync/ReSerialSync.Desktop/ReSerialSync.Deskto
   -p:PublishSingleFile=true -p:StripSymbols=true -o "$package_root"
 find "$package_root" -maxdepth 1 -type f \( -name '*.pdb' -o -name '*.dbg' \) -delete
 cp "$repo_root/LICENSE" "$package_root/"
-cp "$repo_root/docs/releases.md" "$package_root/RUNNING.md"
-cp "$repo_root/docs/third-party-notices.md" "$package_root/THIRD-PARTY-NOTICES.md"
+cp "$repo_root/docs/en/releases.md" "$package_root/RUNNING.md"
+cp "$repo_root/docs/zh-CN/releases.md" "$package_root/RUNNING.zh-CN.md"
+sed 's|(../licenses|(licenses|g' "$repo_root/docs/en/third-party-notices.md" > "$package_root/THIRD-PARTY-NOTICES.md"
+sed 's|(../licenses|(licenses|g' "$repo_root/docs/zh-CN/third-party-notices.md" > "$package_root/THIRD-PARTY-NOTICES.zh-CN.md"
 cp -R "$repo_root/docs/licenses" "$package_root/licenses"
 chmod +x "$package_root/ReSerialSync.Desktop"
 tar -czf "$repo_root/artifacts/$package_name.tar.gz" -C "$repo_root/artifacts" "$package_name"

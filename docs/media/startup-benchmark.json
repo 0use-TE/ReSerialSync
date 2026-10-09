@@ -1,0 +1,62 @@
+[
+  {
+    "Name": "SerialSync",
+    "Trial": 1,
+    "Ready": true,
+    "VisibleResponsiveWindowMs": 450.7
+  },
+  {
+    "Name": "SerialSync",
+    "Trial": 2,
+    "Ready": true,
+    "VisibleResponsiveWindowMs": 437.3
+  },
+  {
+    "Name": "SerialSync",
+    "Trial": 3,
+    "Ready": true,
+    "VisibleResponsiveWindowMs": 435.0
+  },
+  {
+    "Name": "SerialSync",
+    "Trial": 4,
+    "Ready": true,
+    "VisibleResponsiveWindowMs": 442.9
+  },
+  {
+    "Name": "SerialSync",
+    "Trial": 5,
+    "Ready": true,
+    "VisibleResponsiveWindowMs": 458.6
+  },
+  {
+    "Name": "ReSerialSync AOT",
+    "Trial": 1,
+    "Ready": true,
+    "VisibleResponsiveWindowMs": 131.1
+  },
+  {
+    "Name": "ReSerialSync AOT",
+    "Trial": 2,
+    "Ready": true,
+    "VisibleResponsiveWindowMs": 140.9
+  },
+  {
+    "Name": "ReSerialSync AOT",
+    "Trial": 3,
+    "Ready": true,
+    "VisibleResponsiveWindowMs": 133.9
+  },
+  {
+    "Name": "ReSerialSync AOT",
+    "Trial": 4,
+    "Ready": true,
+    "VisibleResponsiveWindowMs": 136.7
+  },
+  {
+    "Name": "ReSerialSync AOT",
+    "Trial": 5,
+    "Ready": true,
+    "VisibleResponsiveWindowMs": 132.4
+  }
+]
