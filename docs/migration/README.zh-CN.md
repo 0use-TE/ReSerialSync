@@ -95,7 +95,7 @@ AOT 也是这次重写中实际遇到的问题。Crystal.Avalonia 原来的事�
 | 旧版 Blazor Hybrid | 53.2 MB | 154.7 MB | **207.9 MB** |
 | 新版 Avalonia AOT | 87.9 MB | 无 | **87.9 MB** |
 
-旧版合计按截图中标出的 WebView2 进程组计算，进程归属待确认。旧版连接 COM7；新版每秒定时收发并更新日志，两张截图的运行状态不同。
+我从 `D:\Software\SerialSync` 启动旧版后，确认 6 个 WebView2 进程都属于 SerialSync：它们位于该程序的进程树中，启动参数和数据目录也都指向 SerialSync。表中旧版合计包含这组进程。旧版截图连接 COM7；新版截图还在每秒定时收发并更新日志，运行状态不同。
 
 ![旧版主进程与标出的 WebView2 进程组](../media/windows-memory-blazor-hybrid.png)
 

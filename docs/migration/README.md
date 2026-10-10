@@ -99,7 +99,7 @@ The rewrite draws its UI with Avalonia, removes the WebView and uses Native AOT 
 | Original Blazor Hybrid app | 53.2 MB | 154.7 MB | **207.9 MB** |
 | Avalonia AOT rewrite | 87.9 MB | None | **87.9 MB** |
 
-The original app's total includes the highlighted WebView2 group; its ownership still needs confirmation. The original app has COM7 connected, while the rewrite sends every second, receives replies and updates logs. These screenshots show different workloads.
+I launched the original app from `D:\Software\SerialSync` and confirmed that all six WebView2 processes belong to SerialSync: they appear in its process tree, and their launch arguments and data directory identify the app. The original total includes this group. COM7 is connected in the original screenshot; the rewrite screenshot also shows one-second timed sends, incoming replies and log updates, so the workloads differ.
 
 ![Original app and highlighted WebView2 process group](../media/windows-memory-blazor-hybrid.png)
 
