@@ -1,10 +1,10 @@
 # Releases and runtime setup
 
-[Preview v0.1.0-preview.1](https://github.com/0use-TE/ReSerialSync/releases/tag/v0.1.0-preview.1):
+[v1.0.0](https://github.com/0use-TE/ReSerialSync/releases/tag/v1.0.0):
 
-- [Windows x64 ZIP](https://github.com/0use-TE/ReSerialSync/releases/download/v0.1.0-preview.1/ReSerialSync-win-x64.zip)
-- [Linux x64 tar.gz](https://github.com/0use-TE/ReSerialSync/releases/download/v0.1.0-preview.1/ReSerialSync-linux-x64.tar.gz)
-- [SHA-256 checksums](https://github.com/0use-TE/ReSerialSync/releases/download/v0.1.0-preview.1/SHA256SUMS.txt)
+- [Windows x64 ZIP](https://github.com/0use-TE/ReSerialSync/releases/download/v1.0.0/ReSerialSync-win-x64.zip)
+- [Linux x64 tar.gz](https://github.com/0use-TE/ReSerialSync/releases/download/v1.0.0/ReSerialSync-linux-x64.tar.gz)
+- [SHA-256 checksums](https://github.com/0use-TE/ReSerialSync/releases/download/v1.0.0/SHA256SUMS.txt)
 
 Native AOT packages do not require a separate .NET runtime, but still require operating-system libraries.
 Extract the entire archive and keep every file, including the Linux `.so` libraries.

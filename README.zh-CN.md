@@ -37,7 +37,7 @@ dotnet run --project ReSerialSync/ReSerialSync.Tests
 ```
 
 Windows 在 Windows 上构建，Linux 在 Linux 上构建，分别使用 `scripts/publish.ps1` 和 `scripts/publish-linux.sh`。
-系统依赖与公开预览版见[运行说明](docs/zh-CN/releases.md)。当前源码包含 10 月 9 日的 AI 发送修复，此前公开预览版尚未包含。
+系统依赖与 [v1.0.0](https://github.com/0use-TE/ReSerialSync/releases/tag/v1.0.0) 下载见[运行说明](docs/zh-CN/releases.md)。该版本包含 10 月 9 日的 AI 发送修复，以及按行虚拟化的接收区。
 Windows 与 Linux AOT 均已构建；因没有 Mac，暂未测试 macOS。浏览器与移动端串口实现尚未完成。
 
 模拟串口、模拟 AI 和 Avalonia Headless 验证共 **127 项通过**。

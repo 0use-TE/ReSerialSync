@@ -37,7 +37,7 @@ dotnet run --project ReSerialSync/ReSerialSync.Tests
 ```
 
 For Native AOT, build Windows on Windows and Linux on Linux using `scripts/publish.ps1` or `scripts/publish-linux.sh`.
-See [runtime instructions](docs/en/releases.md) for dependencies and the published preview. The current source includes the October 9 AI sending fix; the earlier public preview predates it.
+See [runtime instructions](docs/en/releases.md) for dependencies and the [v1.0.0](https://github.com/0use-TE/ReSerialSync/releases/tag/v1.0.0) downloads. That release includes the October 9 AI sending fix and the virtualized receive view.
 The Windows and Linux AOT builds have been produced. macOS has not been tested because I do not have a Mac; browser/mobile serial backends remain unfinished.
 
 The test suite passed **127 checks** using simulated serial ports, simulated AI and Avalonia Headless.

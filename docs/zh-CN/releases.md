@@ -1,10 +1,10 @@
 # 发布与运行
 
-[预览版 v0.1.0-preview.1](https://github.com/0use-TE/ReSerialSync/releases/tag/v0.1.0-preview.1)：
+[v1.0.0](https://github.com/0use-TE/ReSerialSync/releases/tag/v1.0.0)：
 
-- [Windows x64 ZIP](https://github.com/0use-TE/ReSerialSync/releases/download/v0.1.0-preview.1/ReSerialSync-win-x64.zip)
-- [Linux x64 tar.gz](https://github.com/0use-TE/ReSerialSync/releases/download/v0.1.0-preview.1/ReSerialSync-linux-x64.tar.gz)
-- [SHA-256 校验清单](https://github.com/0use-TE/ReSerialSync/releases/download/v0.1.0-preview.1/SHA256SUMS.txt)
+- [Windows x64 ZIP](https://github.com/0use-TE/ReSerialSync/releases/download/v1.0.0/ReSerialSync-win-x64.zip)
+- [Linux x64 tar.gz](https://github.com/0use-TE/ReSerialSync/releases/download/v1.0.0/ReSerialSync-linux-x64.tar.gz)
+- [SHA-256 校验清单](https://github.com/0use-TE/ReSerialSync/releases/download/v1.0.0/SHA256SUMS.txt)
 
 Native AOT 发布包不需要另行安装 .NET 运行时，但仍依赖操作系统的原生库。
 请完整解压，保留全部文件，包括 Linux 的 `.so` 库。
