@@ -233,7 +233,8 @@ try
     vm.SettingsPanel.Style.ClassicHeader = false; vm.BottomSelected = vm.BottomTabs.First(x => x.Id == "send"); Pump();
 
     var sendBox = window.GetVisualDescendants().OfType<SendView>().Single().GetVisualDescendants().OfType<TextBox>().First(b => b.AcceptsReturn && !b.IsReadOnly);
-    var receiveBox = window.GetVisualDescendants().OfType<ReceiveView>().Single().GetVisualDescendants().OfType<TextBox>().First(b => b.IsReadOnly);
+    var receiveBox = window.GetVisualDescendants().OfType<ReceiveView>().Single().GetVisualDescendants().OfType<ListBox>().Single();
+    string ShownReceive() => string.Concat(receiveBox.Items.Cast<ReceiveRow>().Select(row => row.Text));
     Check(sendBox.Padding == new Thickness(12) && receiveBox.Padding == new Thickness(12), "Both editors have explicit padding");
     Run(first.ToggleConnectionCommand.ExecuteAsync(null));
     Check(first.IsConnected && !first.CanConfigure, "Connection locks only its own parameters");
@@ -258,13 +259,13 @@ try
     firstSerial.Receive(chinese[..2]); Pump(); firstSerial.Receive(chinese[2..]); Pump();
     secondSerial.Receive(Encoding.UTF8.GetBytes("other")); Pump();
     Check(first.ReceiveText == "中文" && first.ReceivedBytes == 6, "UTF-8 decoder preserves partial characters");
-    Check(second.ReceiveText == "other" && receiveBox.Text == "other", "Inactive port keeps receiving without changing the selected display");
+    Check(second.ReceiveText == "other" && ShownReceive() == "other", "Inactive port keeps receiving without changing the selected display");
     workspace.SelectedPort = first; Pump();
-    Check(receiveBox.Text == "中文" && sendBox.Text == "Z1", "Selecting a port restores its receive and send VM");
+    Check(ShownReceive() == "中文" && sendBox.Text == "Z1", "Selecting a port restores its receive and send VM");
     first.IsReceivePaused = true; firstSerial.Receive([0x41]); Pump();
     Check(first.ReceiveText == "中文" && first.ReceivedBytes == 7, "Pause still receives and counts");
     first.IsReceivePaused = false; first.ReceiveHex = true; firstSerial.Receive([0x00, 0xFF]); Pump();
-    Check(first.ReceiveText.Contains("00 FF") && receiveBox.CaretIndex == receiveBox.Text!.Length, "HEX display and TextChanged auto-scroll");
+    Check(first.ReceiveText.Contains("00 FF") && first.ReceiveTailFollowed, "HEX display and auto-scroll");
     Check(!second.Logs.Any(line => line.Contains("TX COM1")) && !first.Logs.Any(line => line.Contains("TX COM2")), "Per-port log streams remain isolated");
 
     string WithoutReceiveTimestamps() => System.Text.RegularExpressions.Regex.Replace(first.ReceiveText,

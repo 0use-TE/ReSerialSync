@@ -22,6 +22,7 @@ namespace ReSerialSync.ViewModels;
 public partial class SerialSessionViewModel : ViewModelBase, IDisposable
 {
     private const int MaxReceiveCharacters = 256 * 1024;
+    private const int MaxReceiveRowChars = 1024;
     private readonly ISerialPortService _serial;
     private readonly SettingsService _settings;
     private readonly AppLogService _log;
@@ -40,6 +41,12 @@ public partial class SerialSessionViewModel : ViewModelBase, IDisposable
     private bool _disposed;
     private bool _handlingFault;
     private Decoder _decoder;
+    private readonly ObservableCollection<ReceiveRow> _receiveLines = [];
+    private readonly StringBuilder _receiveOpen = new();
+    private bool _receiveOpenRow;
+    private bool _receivePendingCr;
+    private char _receiveLast = '\n';
+    private string? _receiveCache = "";
 
     public ObservableCollection<string> Logs { get; } = [];
     public int[] BaudRates { get; } = [1200, 2400, 4800, 9600, 19200, 38400, 57600, 115200, 230400, 460800, 921600];
@@ -105,10 +112,27 @@ public partial class SerialSessionViewModel : ViewModelBase, IDisposable
     [ObservableProperty] private bool _isBusy;
     [ObservableProperty] private bool _isAutoSending;
     [ObservableProperty] private bool _isReceivePaused;
-    [ObservableProperty] private string _receiveText = "";
     [ObservableProperty] private long _receivedBytes;
     [ObservableProperty] private long _sentBytes;
     [ObservableProperty] private string? _selectedLog;
+    public ObservableCollection<ReceiveRow> ReceiveLines => _receiveLines;
+    public bool ReceiveTailFollowed { get; private set; }
+    public event EventHandler? ReceiveAppended;
+    public string ReceiveText
+    {
+        get
+        {
+            if (_receiveCache is not null) return _receiveCache;
+            var text = new StringBuilder();
+            foreach (var row in _receiveLines)
+            {
+                text.Append(row.Text);
+                text.Append(row.Ending);
+            }
+            if (_receivePendingCr) text.Append('\r');
+            return _receiveCache = text.ToString();
+        }
+    }
 
     public SerialSessionViewModel(ISerialPortService serial, SettingsService settings, AppLogService log,
         LocalizationService text, NotificationService notifications, SerialSettings profile)
@@ -287,7 +311,7 @@ public partial class SerialSessionViewModel : ViewModelBase, IDisposable
                     while (start < count && chars[start] is '\r' or '\n') builder.Append(chars[start++]);
                     if (start < count)
                     {
-                        var previous = builder.Length > 0 ? builder[^1] : ReceiveText.Length > 0 ? ReceiveText[^1] : '\n';
+                        var previous = builder.Length > 0 ? builder[^1] : _receiveLast;
                         if (previous is not ('\r' or '\n')) builder.AppendLine();
                         builder.Append($"[{DateTimeOffset.Now:HH:mm:ss.fff}] RX ");
                     }
@@ -295,11 +319,7 @@ public partial class SerialSessionViewModel : ViewModelBase, IDisposable
                 builder.Append(chars, start, count - start);
             }
         }
-        if (builder.Length > 0)
-        {
-            var text = ReceiveText + builder;
-            ReceiveText = text.Length > MaxReceiveCharacters ? text[^MaxReceiveCharacters..] : text;
-        }
+        if (builder.Length > 0) AppendReceive(builder.ToString());
         for (var i = 0; i < 200 && _logQueue.TryDequeue(out var line); i++)
         {
             Interlocked.Decrement(ref _queuedLogs); Logs.Add(line);
@@ -311,7 +331,14 @@ public partial class SerialSessionViewModel : ViewModelBase, IDisposable
     [RelayCommand] private void ClearReceive()
     {
         while (_receiveQueue.TryDequeue(out var bytes)) Interlocked.Add(ref _queuedBytes, -bytes.Length);
-        ReceiveText = ""; _decoder.Reset();
+        _receiveLines.Clear();
+        _receiveOpen.Clear();
+        _receiveOpenRow = false;
+        _receivePendingCr = false;
+        _receiveLast = '\n';
+        _receiveCache = "";
+        ReceiveTailFollowed = false;
+        _decoder.Reset();
     }
     [RelayCommand] private void ClearLogs()
     {
@@ -319,7 +346,145 @@ public partial class SerialSessionViewModel : ViewModelBase, IDisposable
         Logs.Clear(); SelectedLog = null;
     }
     [RelayCommand] private void ResetCounters() { Interlocked.Exchange(ref _receivedTotal, 0); ReceivedBytes = 0; SentBytes = 0; }
-    [RelayCommand] private void ScrollReceive(TextBox? box) { if (AutoScroll && box is not null) box.CaretIndex = box.Text?.Length ?? 0; }
+    [RelayCommand] private void ScrollReceive(ListBox? box)
+    {
+        if (!AutoScroll || box is null || ReceiveLines.Count == 0) return;
+        if (box.SelectedItems is { Count: > 0 }) return;
+        box.ScrollIntoView(ReceiveLines[^1]);
+        ReceiveTailFollowed = true;
+    }
+
+    private void AppendReceive(string addition)
+    {
+        if (addition.Length == 0) return;
+        ReceiveTailFollowed = false;
+        _receiveCache = null;
+        for (var i = 0; i < addition.Length; i++)
+        {
+            var c = addition[i];
+            if (_receivePendingCr)
+            {
+                _receivePendingCr = false;
+                if (c == '\n')
+                {
+                    CommitReceiveRow("\r\n");
+                    _receiveLast = '\n';
+                    continue;
+                }
+                CommitReceiveRow("\r");
+            }
+            if (c == '\r')
+            {
+                _receivePendingCr = true;
+                _receiveLast = '\r';
+                continue;
+            }
+            if (c == '\n')
+            {
+                CommitReceiveRow("\n");
+                _receiveLast = '\n';
+                continue;
+            }
+            _receiveOpen.Append(c);
+            _receiveLast = c;
+            if (_receiveOpen.Length >= MaxReceiveRowChars) CommitReceiveRow("");
+        }
+        if (_receiveOpen.Length > 0) ShowOpenReceiveRow();
+        TrimReceive();
+        ReceiveAppended?.Invoke(this, EventArgs.Empty);
+    }
+
+    private void CommitReceiveRow(string ending)
+    {
+        var text = _receiveOpen.ToString();
+        _receiveOpen.Clear();
+        if (_receiveOpenRow)
+        {
+            var row = _receiveLines[^1];
+            row.Text = text;
+            row.Ending = ending;
+            _receiveOpenRow = false;
+            return;
+        }
+        _receiveLines.Add(new ReceiveRow(text, ending));
+    }
+
+    private void ShowOpenReceiveRow()
+    {
+        var text = _receiveOpen.ToString();
+        if (_receiveOpenRow)
+        {
+            _receiveLines[^1].Text = text;
+            return;
+        }
+        _receiveLines.Add(new ReceiveRow(text, ""));
+        _receiveOpenRow = true;
+    }
+
+    private void TrimReceive()
+    {
+        var excess = ReceiveLength() - MaxReceiveCharacters;
+        if (excess <= 0) return;
+        _receiveCache = null;
+        while (excess > 0 && _receiveLines.Count > (_receiveOpenRow ? 1 : 0))
+        {
+            var row = _receiveLines[0];
+            var size = row.Text.Length + row.Ending.Length;
+            if (size <= excess)
+            {
+                excess -= size;
+                _receiveLines.RemoveAt(0);
+                continue;
+            }
+            TrimReceiveRow(row, excess);
+            excess = 0;
+        }
+        if (excess > 0 && _receiveOpenRow)
+        {
+            var row = _receiveLines[0];
+            if (row.Text.Length <= excess)
+            {
+                excess -= row.Text.Length;
+                _receiveLines.RemoveAt(0);
+                _receiveOpen.Clear();
+                _receiveOpenRow = false;
+            }
+            else
+            {
+                var trimmed = row.Text[excess..];
+                row.Text = trimmed;
+                _receiveOpen.Clear();
+                _receiveOpen.Append(trimmed);
+                excess = 0;
+            }
+        }
+        if (excess > 0 && _receivePendingCr)
+        {
+            _receivePendingCr = false;
+            excess--;
+        }
+        if (ReceiveLength() == 0) _receiveLast = '\n';
+    }
+
+    private static void TrimReceiveRow(ReceiveRow row, int excess)
+    {
+        if (excess < row.Text.Length)
+        {
+            row.Text = row.Text[excess..];
+            return;
+        }
+        var rest = excess - row.Text.Length;
+        row.Text = "";
+        row.Ending = row.Ending[rest..];
+    }
+
+    private int ReceiveLength()
+    {
+        var count = _receivePendingCr ? 1 : 0;
+        var limit = _receiveLines.Count - (_receiveOpenRow ? 1 : 0);
+        for (var i = 0; i < limit; i++) count += _receiveLines[i].Text.Length + _receiveLines[i].Ending.Length;
+        return count + _receiveOpen.Length;
+    }
     [RelayCommand] private void ScrollLog(ListBox? box) { if (AutoScroll && SelectedLog is not null) box?.ScrollIntoView(SelectedLog); }
     [RelayCommand] private Task ExportReceiveAsync(Control? anchor) => ExportAsync(anchor, "receive", ReceiveText);
     [RelayCommand] private Task ExportLogsAsync(Control? anchor) => ExportAsync(anchor, "logs", string.Join(Environment.NewLine, Logs));

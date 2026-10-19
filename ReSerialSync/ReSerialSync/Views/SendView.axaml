@@ -12,9 +12,10 @@
             <TextBlock Text="{Binding Text[LineEnding]}" VerticalAlignment="Center" Margin="0,0,8,0" />
             <ComboBox VerticalAlignment="Center" Height="36" ItemsSource="{Binding Text.LineEndings}" SelectedItem="{Binding Session.SelectedLineEnding, Mode=TwoWay}" Width="100" />
         </WrapPanel>
-        <TextBox Classes="Bordered" Grid.Row="1" Text="{Binding Session.SendText, Mode=TwoWay}" AcceptsReturn="True" TextWrapping="Wrap" Padding="12"
+        <TextBox Classes="Bordered" Grid.Row="1" Text="{Binding Session.SendText, Mode=TwoWay}" AcceptsReturn="True" TextWrapping="NoWrap" Padding="12"
                  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="Cascadia Mono,Consolas,monospace"
-                 VerticalContentAlignment="Top" MaxLength="65536" PlaceholderText="{Binding Session.SendPlaceholder}" />
+                 VerticalContentAlignment="Top" MaxLength="65536" PlaceholderText="{Binding Session.SendPlaceholder}"
+                 ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" />
         <WrapPanel ItemHeight="36" Grid.Row="2" Margin="0,4,0,0">
             <Button Height="36" VerticalAlignment="Center" Content="{Binding Text[Send]}" IsEnabled="{Binding Session.IsConnected}" Command="{Binding Session.SendCommand}" Margin="0,0,12,0" />
             <TextBlock Text="{Binding Text[Interval]}" VerticalAlignment="Center" Margin="0,0,8,0" />
